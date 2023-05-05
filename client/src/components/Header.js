@@ -1,11 +1,13 @@
 import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Header({ homePage, sidebar }) {
     const searchBtn = useRef();
     const modeSwitch = useRef();
     const modeText = useRef();
-
+    const menuBar = useRef();
+    const location = useLocation();
+    
     const handleClick = () => {
         homePage.current.classList.toggle('dark');
 
@@ -17,7 +19,19 @@ function Header({ homePage, sidebar }) {
     }
 
     useEffect(() => {
+        const adr = location.pathname;
+        console.log(typeof adr)
         
+        const menuItems = menuBar.current.children;
+        
+        for (let i = 0; i < menuItems.length; i++) {
+            const item = menuItems[i].querySelector('a');
+
+            if (item.getAttribute('href') === adr) {
+                item.classList.add('active');
+            }
+            else item.classList.remove('active');
+        }
     })
 
     return (
@@ -43,7 +57,7 @@ function Header({ homePage, sidebar }) {
                         <i className='bx bx-search icons'></i>
                         <input type="text" placeholder="Search..."/>
                     </li>
-                    <ul className="menu-links">
+                    <ul className="menu-links" ref={menuBar}>
                         <li className="nav-link">
                             <Link to='/home' replace>
                                 <i className='bx bx-home-alt icons'></i>

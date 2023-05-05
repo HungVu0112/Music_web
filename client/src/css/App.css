@@ -277,18 +277,23 @@ header .image-text .header-text {
   border-radius: 6px;
   transition: var(--tran-04);
 }
-
-.sidebar li a:hover {
+ 
+.sidebar li a:hover,
+.menu-bar li .active {
   background: var(--primary-color);
 }
 
 .sidebar li a:hover .icons,
-.sidebar li a:hover .text {
+.sidebar li a:hover .text,
+.menu li .active .icons,
+.menu-bar li .active .text {
   color: var(--sidebar-color);
 }
 
 .homepage.dark .sidebar li a:hover .icons,
-.homepage.dark .sidebar li a:hover .text {
+.homepage.dark .sidebar li a:hover .text,
+.homepage.dark .menu li .active .icons,
+.homepage.dark .menu-bar li .active .text {
   color: var(--text--color);
 }
 
