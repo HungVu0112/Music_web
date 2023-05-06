@@ -10,17 +10,26 @@ function Header({ homePage, sidebar }) {
     
     const handleClick = () => {
         homePage.current.classList.toggle('dark');
-
+    
         if (homePage.current.classList.contains('dark')) {
             modeText.current.innerText = 'Light Mode';
+            sessionStorage.setItem('isDark', "true");
         } else {
             modeText.current.innerText = 'Dark Mode';
+            sessionStorage.setItem('isDark', "false");
         }
     }
 
+    window.addEventListener('load', function() {
+        if(sessionStorage.getItem('isDark') === "true") {
+            if (!homePage.current.classList.contains('dark')) {
+                homePage.current.classList.toggle('dark');
+            }
+        }
+    })
+
     useEffect(() => {
         const adr = location.pathname;
-        console.log(typeof adr)
         
         const menuItems = menuBar.current.children;
         
@@ -33,6 +42,8 @@ function Header({ homePage, sidebar }) {
             else item.classList.remove('active');
         }
     })
+
+    
 
     return (
         <>
@@ -53,15 +64,17 @@ function Header({ homePage, sidebar }) {
 
             <div className="menu-bar">
                 <div className="menu">
-                    <li className="search-box" ref={searchBtn}>
-                        <i className='bx bx-search icons'></i>
-                        <input type="text" placeholder="Search..."/>
-                    </li>
                     <ul className="menu-links" ref={menuBar}>
                         <li className="nav-link">
                             <Link to='/home' replace>
                                 <i className='bx bx-home-alt icons'></i>
                                 <span className="text nav-text">Home</span>
+                            </Link>
+                        </li>
+                        <li className="nav-link">
+                            <Link to='/home/search' replace>
+                                <i className='bx bx-search icons'></i>
+                                <span className="text nav-text">Seach</span>
                             </Link>
                         </li>
                         <li className="nav-link">
@@ -89,7 +102,7 @@ function Header({ homePage, sidebar }) {
                             </Link>
                         </li>
                         <li className="nav-link">
-                            <Link to='/home/createPlaylist' replace>
+                            <Link to='/home/aboutus' replace>
                                 <i className='bx bxs-group icons'></i>
                                 <span className="text nav-text">About Us</span>
                             </Link>
