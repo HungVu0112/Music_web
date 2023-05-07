@@ -98,7 +98,7 @@ function Header({ homePage, sidebar }) {
                         <li className="nav-link">
                             <Link to='/home/createPlaylist' replace>
                                 <i className='bx bx-library icons'></i>
-                                <span className="text nav-text">Create Playlist</span>
+                                <span className="text nav-text">Playlists</span>
                             </Link>
                         </li>
                         <li className="nav-link">
