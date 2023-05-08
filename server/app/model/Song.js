@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const slug = require('mongoose-slug-generator')
 
 const Song = new Schema({
   name: { type: String },
