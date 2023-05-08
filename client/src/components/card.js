@@ -12,3 +12,4 @@ function Card({ img, name, desc }) {
 }
 
 export default Card;
+// may thang nguuuuuuuuuuuuuuuuuuuuuuuuuu
