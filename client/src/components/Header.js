@@ -43,14 +43,12 @@ function Header({ homePage, sidebar }) {
         }
     })
 
-    
-
     return (
         <>
             <header>
                 <div className="image-text">
                     <span className="icon">
-                        <i className='bx bxl-spring-boot logo'></i>
+                        <i className='bx bxs-bowl-rice logo'></i>
                     </span>
 
                     <div className="text header-text">
@@ -72,37 +70,31 @@ function Header({ homePage, sidebar }) {
                             </Link>
                         </li>
                         <li className="nav-link">
-                            <Link to='/home/search' replace>
+                            <Link to='/search' replace>
                                 <i className='bx bx-search icons'></i>
                                 <span className="text nav-text">Seach</span>
                             </Link>
                         </li>
                         <li className="nav-link">
-                            <Link to='/home/artists' replace>
+                            <Link to='/artists' replace>
                                 <i className='bx bx-user icons'></i>
                                 <span className="text nav-text">Artists</span>
                             </Link>
                         </li>
                         <li className="nav-link">
-                            <Link to='/home/recent' replace>
-                                <i className='bx bxl-deezer icons'></i>
-                                <span className="text nav-text">Recent Played</span>
-                            </Link>
-                        </li>
-                        <li className="nav-link">
-                            <Link to='/home/favourite' replace>
-                                <i className='bx bx-heart icons'></i>
-                                <span className="text nav-text">Favourite Songs</span>
-                            </Link>
-                        </li>
-                        <li className="nav-link">
-                            <Link to='/home/createPlaylist' replace>
+                            <Link to='/library' replace>
                                 <i className='bx bx-library icons'></i>
+                                <span className="text nav-text">Library</span>
+                            </Link>
+                        </li>
+                        <li className="nav-link">
+                            <Link to='/playlists' replace>
+                                <i className='bx bxs-folder icons'></i>
                                 <span className="text nav-text">Playlists</span>
                             </Link>
                         </li>
                         <li className="nav-link">
-                            <Link to='/home/aboutus' replace>
+                            <Link to='/aboutus' replace>
                                 <i className='bx bxs-group icons'></i>
                                 <span className="text nav-text">About Us</span>
                             </Link>

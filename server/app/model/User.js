@@ -1,6 +1,7 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const slug = require('mongoose-slug-generator')
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const Song = require('./Song');
+const Playlist = require('./Playlist');
 
 const User = new Schema({
   username: { type: String, required: true },
@@ -10,11 +11,12 @@ const User = new Schema({
   recent_play: 
     {
       type: [{
-        song_name: { type: String },
+        song: { type: Song.schema },
         time_play: { type: Date },
       }],
       maxItems: 10,
-    }
+    },
+  playlists: { type: [Playlist.schema] },
 }, {
   timestamps: true,
 });

@@ -1,4 +1,5 @@
 const User = require('../model/User');
+const Playlist = require('../model/Playlist');
 
 class UserController {
     checkLogin(req, res, next) {
@@ -29,6 +30,47 @@ class UserController {
                 }
             })
           .catch(next)
+    }
+
+    getUser(req, res, next) {
+        User.findOne({ username: req.params.username })    
+            .then(user => {
+                res.json(user);
+            })
+            .catch(next);
+    }
+
+    createPlaylist(req, res, next) {
+        User.findOne({ username: req.params.name })
+            .then(user => {
+                var count = user.playlists.length + 1;
+                
+                const name = `Playlist #${count}`;
+                const image = "https://i.icanvas.com/list-square/instruments-JCA5.jpg";
+                var songs = [];
+
+                const playlist = new Playlist({
+                    name: name,
+                    image: image,
+                    songs: songs
+                })
+
+                user.playlists.push(playlist);
+                user.save();
+
+                res.json(playlist);
+            })
+            .catch(next)
+    }
+
+    deletePlaylist(req, res, next) {
+        User.findOne({ username: req.params.username })
+            .then(user =>{
+                user.playlists.splice(req.params.id, 1);
+                user.save();
+                res.json("Deleted!");
+            })  
+            .catch(next)
     }
 }
 
