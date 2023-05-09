@@ -1,5 +1,6 @@
 const User = require('../model/User');
 const Playlist = require('../model/Playlist');
+const Song = require('../model/Song');
 
 class UserController {
     checkLogin(req, res, next) {
@@ -71,6 +72,34 @@ class UserController {
                 res.json("Deleted!");
             })  
             .catch(next)
+    }
+
+    searchSong(req, res, next) {
+        const songName = req.params.name.replace(/%20/g, " ");
+        const playlistName = req.params.playlistName.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: req.params.username }), Song.find({ name: songName }).lean()])
+            .then(([user, songs]) => {
+                if (songs) {
+                    const newSongs = songs.map((song) => {
+                        return {...song, isAdded: "false"};
+                    })
+
+                    user.playlists.map((playlist) => {
+                        if (playlist.name === playlistName) {
+                            newSongs.map((song) => {
+                                if (playlist.songs.find(isAddedSong => isAddedSong.name === song.name)) {
+                                    song.isAdded = "true";
+                                }
+                            })
+                        }
+                    })
+
+                    res.json(newSongs);
+                } else {
+                    res.json(["hung"]);
+                }
+            })
+            .catch(next)  
     }
 }
 

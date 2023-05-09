@@ -82,15 +82,15 @@ function Header({ homePage, sidebar }) {
                             </Link>
                         </li>
                         <li className="nav-link">
-                            <Link to='/library' replace>
-                                <i className='bx bx-library icons'></i>
-                                <span className="text nav-text">Library</span>
-                            </Link>
-                        </li>
-                        <li className="nav-link">
                             <Link to='/playlists' replace>
                                 <i className='bx bxs-folder icons'></i>
                                 <span className="text nav-text">Playlists</span>
+                            </Link>
+                        </li>
+                        <li className="nav-link">
+                            <Link to='/library' replace>
+                                <i className='bx bx-library icons'></i>
+                                <span className="text nav-text">Library</span>
                             </Link>
                         </li>
                         <li className="nav-link">

@@ -34,7 +34,7 @@ function MyPlaylist() {
                 <Link to="/library/myPlaylist/create"><i className='bx bx-plus'></i></Link>
             </div>
 
-            <div className="items">
+            <div className="items scroll-bar">
                 {data.username === undefined ? "" : data.playlists.length === 0 ? (
                     <p className="text">You haven't created any playlists yet!</p>
                 ) : (
