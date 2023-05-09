@@ -46,7 +46,7 @@ class UserController {
             .then(user => {
                 var count = user.playlists.length + 1;
                 
-                const name = `Playlist #${count}`;
+                const name = `Playlist ${count}`;
                 const image = "https://i.icanvas.com/list-square/instruments-JCA5.jpg";
                 var songs = [];
 
@@ -77,7 +77,7 @@ class UserController {
     searchSong(req, res, next) {
         const songName = req.params.name.replace(/%20/g, " ");
         const playlistName = req.params.playlistName.replace(/%20/g, " ");
-        Promise.all([User.findOne({ username: req.params.username }), Song.find({ name: songName }).lean()])
+        Promise.all([User.findOne({ username: req.params.username }), Song.find({ name: {'$regex' : songName } }).lean()])
             .then(([user, songs]) => {
                 if (songs) {
                     const newSongs = songs.map((song) => {

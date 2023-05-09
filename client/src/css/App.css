@@ -255,7 +255,11 @@ header .image-text .header-text {
 } */
 
 .sidebar .menu {
-  margin-top: 20px;
+  margin-top: 10px;
+}
+
+.sidebar .bottom-content {
+  margin-bottom: 20px;
 }
 
 .sidebar li a {
@@ -679,6 +683,7 @@ header .image-text .header-text {
 .displayPage .body {
   padding: 0 32px;
   height: calc(100% - 300px);
+  overflow: hidden;
 }
 
 .displayPage .body .tool-bar {
@@ -811,7 +816,7 @@ header .image-text .header-text {
 .content .navigate a:hover {
   opacity: 0.8;
 }
-
+/* Player */
 .bottom{
 	position: fixed;
 	bottom: 0px;
@@ -828,6 +833,7 @@ header .image-text .header-text {
   box-sizing: border-box;
 	z-index: 6;
   position: fixed;
+  display: none;
 }
 
 #bottom-click:target{
