@@ -152,7 +152,7 @@
 
 /* Reusable CSS */
 .sidebar .text {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text--color);
 }
@@ -166,12 +166,12 @@
 
 /* Sidebar */
 .sidebar {
-  padding: 10px 14px;
+  padding: 5px 7px;
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
-  width: 250px;
+  width: 220px;
   background: var(--sidebar-color);
 }
 
@@ -358,8 +358,8 @@ header .image-text .header-text {
 .content {
   position: absolute;
   height: 100%;
-  left: 250px;
-  width: calc(100% - 250px);
+  left: 220px;
+  width: calc(100% - 220px);
 }
 
 .content .text {
@@ -411,7 +411,7 @@ header .image-text .header-text {
   position: fixed;
   display: flex;
   align-items: center;
-  width: calc(100% - 250px);
+  width: calc(100% - 220px);
   height: 60px;
   background-color: var(--infor-bar-color);
   z-index: 1;
@@ -776,6 +776,204 @@ header .image-text .header-text {
   opacity: 0.8;
 }
 
+.bottom{
+	position: fixed;
+	bottom: 0px;
+	width: calc(100%);
+	/*height: 60.2px;*/
+	/* height: 9vh; */
+	height: max-content;
+	background-color: #282828;
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	flex-wrap: wrap;
+	padding: 0px 0%;
+  box-sizing: border-box;
+	z-index: 6;
+  position: fixed;
+}
+
+#bottom-click:target{
+	opacity: 1;
+	transform: scale(1);
+   transition: all ease-in-out 0.4s; 
+}
+.active-song-description {
+	height: 90%;
+	width: 20%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+  margin-right: 70px;
+  
+}
+/*.active-song-description>div{
+	margin-left: 20%;
+}*/
+/* -----Image Container----------- */
+#song-image {
+	padding-top: 1vh !important;
+	width: 60px;
+	height: 60px;
+	min-width: 50px;
+	min-height: 50px;
+  
+}
+/* --Current song image--- */
+#song-image img {
+	width: 100%;
+	height: 100%;
+}
+/* ---Heart and ban icon---- */
+.heart-and-ban-icon {
+	font-size: 200%;
+  display: flex;
+	align-items: center;	
+	height: 100%;
+}
+/*----Making curosr pointer---*/
+.heart-and-ban-icon span{
+	margin: 5%;
+	cursor: pointer;
+}
+/* song decscription */
+.song-desc {
+  color: #E4E9F7;
+  margin-right: 0%;
+	margin-left: 0%;
+}
+/* song name */
+.song-desc div:nth-child(1) {
+	font-size: 20px;
+}
+ .song-desc div:nth-child(2){
+       color: grey;
+    }
+
+/*---------2.Player Controls------------------*/
+.player {
+	
+  width: 30%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: nowrap;
+	padding-bottom: 0.4%;
+  position: relative;
+  margin-right: 80px;
+}
+/* --Controls of the player--- */
+.controls {
+	
+  width: 70%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	/* padding: 1% 2%; */
+  font-size: 150%;
+}
+/*----Making curosr pointer---*/
+.controls>div{
+
+	cursor: pointer;
+}
+.controls>div:hover{
+	
+  border:1px solid lightgrey;
+	border-radius: 50%;
+}
+
+/*---Slider for the song--- */
+#slider {
+	width: 100%;
+	font-size: 5px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content:space-around;
+
+}
+.time {
+  font-size :15px;
+  margin : 0px 5px;
+}
+
+ /*----Adjusting the slider container--- */
+.slidecontainer {
+	width: 100%;
+}
+/* --For song slider appearance---*/
+.slider {
+	-webkit-appearance: none;
+  width: 100%;
+	height: 5px;
+	background: #ec7171;
+	outline: none;
+	opacity: 1;
+	transition: opacity 0.2s;
+}
+/*----Hover on slider----*/
+.slider:hover {
+	opacity: 1;
+}
+/*---Adjusting the dimensions and styling of the SLider--- */
+.slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 17px;
+	height: 17px;
+	border-radius: 50%;
+	background: lightgrey;
+	cursor: pointer;
+}
+/* ---Circle on slider for movin */
+.slider::-moz-range-thumb {
+	width: 25px;
+	height: 25px;
+	background: #4caf50;
+	cursor: pointer;
+}
 
 
+.extras {
+	width: 20%;
+	display: flex;
+	flex-direction: row;
+	justify-content:space-between;
+	align-items:center;
+}
+/*----Making curosr pointer---*/
+.extras>div{
+  cursor: pointer;
+}
 
+@keyframes rotating {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+.website-logo img{
+	height: 60px;
+	width: 60px;
+	border-radius: 100%;
+    padding-top: 5px;
+	animation-name:rotating;
+	animation-timing-function: ease-in-out;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+}
+.title-combo > div {
+	vertical-align: middle;
+	display: inline-block;
+}
+ h4 {
+	color: #e4335c;
+}
