@@ -79,7 +79,7 @@ function SongsDisplay() {
             <div className="body">
                 <div className="tool-bar">
                     <i className='bx bx-play play' ></i>
-                    <i className='bx bx-heart like'></i>
+                    <i className='bx bxs-heart like'></i>
                 </div>
 
                 <div className="list">
@@ -121,11 +121,20 @@ function SongsDisplay() {
                                 <th 
                                     scope="col" 
                                     style={{ 
-                                        width: "85%",
+                                        width: "45%",
                                         textAlign: "left",    
                                     }}
                                 >
                                     Name
+                                </th>
+                                <th
+                                    scope="col" 
+                                    style={{ 
+                                        width: "40%",
+                                        textAlign: "left",    
+                                    }}
+                                >
+                                    Artist
                                 </th>
                                 <th scope="col"><i className='bx bx-time'></i></th>
                             </tr>
@@ -138,7 +147,16 @@ function SongsDisplay() {
                                             <>
                                                 <tr>
                                                     <th scope="row">{index + 1}</th>
-                                                    <td>{song.name}</td>
+                                                    <td>
+                                                        <div className="song-info">
+                                                            <div className="song-img">
+                                                                <img src={song.image} alt="img"/>
+                                                            </div>
+
+                                                            <p>{song.name}</p>
+                                                        </div>
+                                                    </td>
+                                                    <td>{song.artist_name}</td>
                                                     <td style={{ textAlign: "center" }}>2:30</td>
                                                 </tr>
                                             </>
