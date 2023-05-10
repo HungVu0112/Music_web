@@ -1,4 +1,5 @@
 import {useEffect,useState} from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../../components/card';
 import axios from 'axios';
 
@@ -20,7 +21,7 @@ function Artists() {
 
             <div className="body">
                 { data.map((artist, index) => {
-                    return <Card img={artist.image} name={artist.name} key={index}/>
+                    return <Link to={`/artists/${artist.name}`} state={artist}><Card img={artist.image} name={artist.name} key={index} /></Link>
                 })}
             </div>
         </div>

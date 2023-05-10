@@ -1,13 +1,15 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 function SongsDisplay() {
     const [data, setData] = useState({});
     const [songs, setSongs] = useState([]);
+    let check = 0;
     const searchResult = useRef();
     const searchInput = useRef();
     const location = useLocation();
+    const redirect = useNavigate();
     const userJSON = sessionStorage.getItem("account");
     const user = JSON.parse(userJSON);
 
@@ -30,27 +32,40 @@ function SongsDisplay() {
 
             searchResult.current.style.display = "block";
 
-            e.target.addEventListener("blur", onBlurHandler)
-            e.target.addEventListener("focus", onFocusHandler)
+            // e.target.addEventListener("blur", onBlurHandler)
+            // e.target.addEventListener("focus", onFocusHandler)
         } else {
             searchResult.current.style.display = "none";
-
-            e.target.removeEventListener("blur", onBlurHandler);
-            e.target.removeEventListener("focus", onFocusHandler);
         }
+    }
+
+    function handleAdd(e, songName) {
+        axios.get(`http://localhost:9000/user/playlist/addSong/${songName}&${data.name}&${user.username}`)
+            .then(res => {
+                axios.get(`http://localhost:9000/user/playlist/searchSong/${songName}&${data.name}&${user.username}`, songs)
+                .then(res => {
+                    setSongs(res.data);
+                })
+                .catch(err => {console.log(err)})
+            })
+            .catch(err => {console.log(err)});
     }
 
     useEffect(() => {
         if (location.pathname === "/library/myPlaylist/create") {
             axios.get(`http://localhost:9000/user/playlist/create/${user.username}`, data)
                 .then(res => {
-                    setData(res.data);
+                    redirect(`/library/myPlaylist/${res.data.name}`, { state: res.data });
                 })
                 .catch(err => { console.log(err); })
         } else {
-            setData(location.state);
+            axios.get(`http://localhost:9000/user/playlist/${location.state.name}&${user.username}`, data)
+                .then(res => {
+                    setData(res.data);
+                })
+                .catch(err => { console.log(err); })
         }
-    }, [location.pathname, location.state]);
+    }, [location.pathname, location.state, songs]);
 
     return (
        <div className="displayPage main-content">
@@ -64,7 +79,7 @@ function SongsDisplay() {
             <div className="body">
                 <div className="tool-bar">
                     <i className='bx bx-play play' ></i>
-                    <i className='bx bx-heart like'></i>
+                    <i className='bx bxs-heart like'></i>
                 </div>
 
                 <div className="list">
@@ -74,9 +89,27 @@ function SongsDisplay() {
                     </div>
 
                     <div className="search-result scroll-bar" ref={searchResult}>
-                        {songs.length === 0 ? <h1>Khong co bai hat</h1> : (
-                            songs.map((song) => {
-                                return <h1>{song.name}</h1>
+                        {songs.length === 0 ? <p className="error">Song doesn't exists</p> : (
+                            songs.map((song, index) => {
+                                return (
+                                    <div key={index} className="song-result">
+                                        <div className="song-info">
+                                            <div className="song-img">
+                                                <img src={song.image} alt="img"/>
+                                            </div>
+
+                                            <div className="song-desc">
+                                                <h2>{song.name}</h2>
+                                                <p>{song.artist_name}</p>
+                                            </div>
+                                        </div>
+
+                                        {song.isAdded === "true" ? 
+                                            <button disabled>Added</button>
+                                        :   <button onClick={(e) => handleAdd(e, song.name)}>Add</button>    
+                                    }
+                                    </div>
+                                )
                             })
                         )}
                     </div>
@@ -88,11 +121,20 @@ function SongsDisplay() {
                                 <th 
                                     scope="col" 
                                     style={{ 
-                                        width: "85%",
+                                        width: "45%",
                                         textAlign: "left",    
                                     }}
                                 >
                                     Name
+                                </th>
+                                <th
+                                    scope="col" 
+                                    style={{ 
+                                        width: "40%",
+                                        textAlign: "left",    
+                                    }}
+                                >
+                                    Artist
                                 </th>
                                 <th scope="col"><i className='bx bx-time'></i></th>
                             </tr>
@@ -105,7 +147,16 @@ function SongsDisplay() {
                                             <>
                                                 <tr>
                                                     <th scope="row">{index + 1}</th>
-                                                    <td>{song.name}</td>
+                                                    <td>
+                                                        <div className="song-info">
+                                                            <div className="song-img">
+                                                                <img src={song.image} alt="img"/>
+                                                            </div>
+
+                                                            <p>{song.name}</p>
+                                                        </div>
+                                                    </td>
+                                                    <td>{song.artist_name}</td>
                                                     <td style={{ textAlign: "center" }}>2:30</td>
                                                 </tr>
                                             </>
