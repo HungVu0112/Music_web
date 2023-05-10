@@ -79,7 +79,6 @@ function SongsDisplay() {
             <div className="body">
                 <div className="tool-bar">
                     <i className='bx bx-play play' ></i>
-                    <i className='bx bxs-heart like'></i>
                 </div>
 
                 <div className="list">

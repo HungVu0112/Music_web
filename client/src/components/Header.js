@@ -56,11 +56,11 @@ function Header({ homePage, sidebar }) {
                         <span className="profession">Music Web</span>
                     </div>
                 </div> */}
-                <div class="title-combo">
-                    <div class="website-logo">
+                <div className="title-combo">
+                    <div className="website-logo">
                         <img src="https://cdn0.iconfinder.com/data/icons/internet-2020/1080/Applemusicandroid-512.png"/>
                     </div>
-                <div class="text header-text">
+                <div className="text header-text">
                     <h1>
                         E11 
                     </h1>
