@@ -1,12 +1,44 @@
 import { useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 function SongsDisplay() {
     const [data, setData] = useState({});
+    const [songs, setSongs] = useState([]);
+    const searchResult = useRef();
+    const searchInput = useRef();
     const location = useLocation();
     const userJSON = sessionStorage.getItem("account");
     const user = JSON.parse(userJSON);
+
+    function onBlurHandler() {
+        searchResult.current.style.display = "none";
+      }
+      
+    function onFocusHandler() {
+        searchResult.current.style.display = "block";
+    }
+
+    const handleInput = (e) => {
+        const value = e.target.value;
+        if (value !== "") {
+            axios.get(`http://localhost:9000/user/playlist/searchSong/${value}&${data.name}&${user.username}`, songs)
+                .then(res => {
+                    setSongs(res.data);
+                })
+                .catch(err => {console.log(err)})
+
+            searchResult.current.style.display = "block";
+
+            e.target.addEventListener("blur", onBlurHandler)
+            e.target.addEventListener("focus", onFocusHandler)
+        } else {
+            searchResult.current.style.display = "none";
+
+            e.target.removeEventListener("blur", onBlurHandler);
+            e.target.removeEventListener("focus", onFocusHandler);
+        }
+    }
 
     useEffect(() => {
         if (location.pathname === "/library/myPlaylist/create") {
@@ -38,7 +70,15 @@ function SongsDisplay() {
                 <div className="list">
                     <div className="search-box">
                         <i className='bx bx-search-alt'></i>
-                        <input type="text" placeholder="Search songs to add..." />
+                        <input type="text" placeholder="Search songs to add..." onChange={handleInput} ref={searchInput}/>
+                    </div>
+
+                    <div className="search-result scroll-bar" ref={searchResult}>
+                        {songs.length === 0 ? <h1>Khong co bai hat</h1> : (
+                            songs.map((song) => {
+                                return <h1>{song.name}</h1>
+                            })
+                        )}
                     </div>
 
                     <table className="table">
@@ -59,7 +99,7 @@ function SongsDisplay() {
                         </thead>
                         <tbody>
                             {data ? (
-                                data.songs === undefined ? "" : (
+                                data.songs === undefined ? <tr></tr> : (
                                     data.songs.map((song, index) => {
                                         return (
                                             <>
@@ -72,7 +112,7 @@ function SongsDisplay() {
                                         )
                                     }
                                 )
-                            )) : ""}
+                            )) : <tr></tr>}
                         </tbody>
                     </table>
                 </div>
