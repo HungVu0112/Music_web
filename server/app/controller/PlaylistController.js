@@ -8,15 +8,6 @@ class PlaylistController{
             })
             .catch(next);
     }
-
-    getPlaylist(req, res, next) {
-        const playlistName = req.params.name.replace(/%20/g, " ");
-        Playlist.findOne({ name: playlistName })
-            .then(playlist => {
-                res.json(playlist);
-            })
-            .catch(next);
-    }
 }
 
 module.exports = new PlaylistController;
