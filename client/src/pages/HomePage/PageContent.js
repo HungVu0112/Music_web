@@ -93,8 +93,9 @@ function PageContent({children}) {
                 <span>
                     <i className="fas fa-ban"></i>
                 </span>
-                </div>
+
             </div>
+        </div>
 
             <div className="player">
                 <div className="controls">
