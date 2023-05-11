@@ -41,6 +41,19 @@ class UserController {
             .catch(next);
     }
 
+    getPlaylist(req, res, next) {
+        const playlistName = req.params.name.replace(/%20/g, " ");
+        User.findOne({ username: req.params.username })
+            .then(user => {
+                user.playlists.map(playlist => {
+                    if (playlist.name === playlistName) {
+                        res.json(playlist);
+                    }
+                })
+            })
+            .catch(next);
+    }
+
     createPlaylist(req, res, next) {
         User.findOne({ username: req.params.name })
             .then(user => {
@@ -77,7 +90,7 @@ class UserController {
     searchSong(req, res, next) {
         const songName = req.params.name.replace(/%20/g, " ");
         const playlistName = req.params.playlistName.replace(/%20/g, " ");
-        Promise.all([User.findOne({ username: req.params.username }), Song.find({ name: {'$regex' : songName } }).lean()])
+        Promise.all([User.findOne({ username: req.params.username }), Song.find({ name: { $regex : new RegExp(`${songName}`, 'i') } }).lean()])
             .then(([user, songs]) => {
                 if (songs) {
                     const newSongs = songs.map((song) => {
@@ -100,6 +113,23 @@ class UserController {
                 }
             })
             .catch(next)  
+    }
+
+    addSong(req, res, next) {
+        const songName = req.params.name.replace(/%20/g, " ");
+        const playlistName = req.params.playlistName.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: req.params.username }), Song.findOne({ name: songName })])
+            .then(([user, song]) => {
+                user.playlists.map((playlist) => {
+                    if (playlist.name === playlistName) {
+                        playlist.songs.push(song);
+                    }
+                })
+
+                user.save();
+                res.json("added");
+            })
+            .catch(next)
     }
 }
 

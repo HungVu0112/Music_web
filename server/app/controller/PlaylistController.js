@@ -1,14 +1,22 @@
 const Playlist = require('../model/Playlist');
 
 class PlaylistController{
-    index(req,res,next){
+    getAll(req, res, next) {
         Playlist.find()
+            .then(playlists => {
+                res.json(playlists);
+            })
+            .catch(next);
+    }
+
+    getPlaylist(req, res, next) {
+        const playlistName = req.params.name.replace(/%20/g, " ");
+        Playlist.findOne({ name: playlistName })
             .then(playlist => {
                 res.json(playlist);
             })
-            .catch(next) 
+            .catch(next);
     }
-
 }
 
 module.exports = new PlaylistController;
