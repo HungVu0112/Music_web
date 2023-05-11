@@ -39,7 +39,9 @@ function SignUp() {
         <div className='signup'>
             <div className='form'>
                 <div className='form-header'>
-                    <i class='bx bxs-music'></i>
+                    <div class="website-logo">
+                        <img src="https://cdn0.iconfinder.com/data/icons/internet-2020/1080/Applemusicandroid-512.png"/>
+                    </div>
                     Signup
                 </div>
                 

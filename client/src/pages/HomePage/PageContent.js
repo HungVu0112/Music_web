@@ -30,7 +30,7 @@ function PageContent({children}) {
     },[location.pathname])
 
     return (
-    <div className='homepage' ref={homePage}>
+    <div className='homepage dark'  ref={homePage}>
         <div className='sidebar' ref={sidebar}>
             <Header homePage={homePage} sidebar={sidebar} />
         </div>
@@ -78,11 +78,11 @@ function PageContent({children}) {
         </div>
     <div class="player">
             <div class="controls">
-                <div><i class='bx bx-shuffle'></i></div>
-                <div><i class='bx bx-skip-previous'></i></div>
-                <div><i class='bx bx-pause'></i></div>
-                <div><i class='bx bx-skip-next'></i></div>
-                <div><i class='bx bx-sync'></i></div>
+                <i class='bx bx-shuffle'></i>
+                <i class='bx bx-skip-previous'></i>
+                <i class='bx bx-pause'></i>
+                <i class='bx bx-skip-next'></i>
+                <i class='bx bx-sync'></i>
             </div>
             <div id="slider">
                 <div class="time">

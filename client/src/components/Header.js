@@ -46,16 +46,6 @@ function Header({ homePage, sidebar }) {
     return (
         <>
             <header>
-                {/* <div className="image-text">
-                    <span className="icon">
-                        <i className='bx bxs-bowl-rice logo'></i>
-                    </span>
-
-                    <div className="text header-text">
-                        <span className="name">E11</span>
-                        <span className="profession">Music Web</span>
-                    </div>
-                </div> */}
                 <div class="title-combo">
                     <div class="website-logo">
                         <img src="https://cdn0.iconfinder.com/data/icons/internet-2020/1080/Applemusicandroid-512.png"/>
@@ -129,7 +119,7 @@ function Header({ homePage, sidebar }) {
                             <i className="bx bx-sun icons sun"></i>
                         </div>
 
-                        <span className="mode-text text" ref={modeText}>Dark mode</span>
+                        <span className="mode-text text" ref={modeText}>Light Mode</span>
 
                         <div className="toggle-switch" ref={modeSwitch} onClick={handleClick}>
                             <span className="switch"></span>
