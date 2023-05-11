@@ -1025,7 +1025,6 @@ header .image-text .header-text {
   font-size: 150%;
 }
 /*----Making curosr pointer---*/
-<<<<<<< HEAD
 .controls>i{
 	cursor: pointer;
 }
@@ -1033,11 +1032,10 @@ header .image-text .header-text {
   border:1px solid  #ec7171;
 	border-radius: 50%;
 }
-=======
+
 .controls>div{
 	cursor: pointer;
 }
->>>>>>> 2fb0cbc3a4665c59ed42124868e5fc95f40ed9b9
 
 /*---Slider for the song--- */
 #slider {
@@ -1112,6 +1110,7 @@ header .image-text .header-text {
 		transform: rotate(360deg);
 	}
 }
+
 .website-logo img{
 	height: 60px;
 	width: 60px;
@@ -1130,8 +1129,7 @@ header .image-text .header-text {
 h4 {
 	color: #e4335c;
 }
-<<<<<<< HEAD
-=======
+
 /* ArboutUs */
 .aboutus {
   overflow: hidden;
@@ -1192,4 +1190,3 @@ h4 {
   background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
 }
 
->>>>>>> 2fb0cbc3a4665c59ed42124868e5fc95f40ed9b9
