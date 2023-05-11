@@ -12,7 +12,8 @@ function PageContent({children}) {
     const searchBox = useRef();
     const navigate = useRef();
     const player = useRef();
-    const redirectBack = useRef();
+    const redirectBack1 = useRef();
+    const redirectBack2 = useRef();
 
     useEffect(() => {
         if (location.pathname === "/search") {
@@ -30,9 +31,13 @@ function PageContent({children}) {
         } else navigate.current.style.display = "none";
 
         if (location.pathname.includes("/artists/")) {
-            redirectBack.current.style.display = "";
-        } else redirectBack.current.style.display = "none";
+            redirectBack1.current.style.display = "";
+        } else redirectBack1.current.style.display = "none";
 
+        if (location.pathname.includes("/playlists/")) {
+            redirectBack2.current.style.display = "";
+        } else redirectBack2.current.style.display = "none";
+        
     },[location.pathname])
 
     return (
@@ -53,7 +58,11 @@ function PageContent({children}) {
                     <Link to="/library/favourite">Favourite</Link>
                 </div>
 
-                <Link to="/artists" className="redirect-back" ref={redirectBack}>
+                <Link to="/artists" className="redirect-back" ref={redirectBack1}>
+                    <i className='bx bx-chevron-left'></i>
+                </Link>
+                
+                <Link to="/playlists" className="redirect-back" ref={redirectBack2}>
                     <i className='bx bx-chevron-left'></i>
                 </Link>
 
