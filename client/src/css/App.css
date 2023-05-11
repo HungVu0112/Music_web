@@ -1040,11 +1040,16 @@ header .image-text .header-text {
 }
 
 .aboutus .body .card {
-  width: 22%;
-  height: 260px;
+  width: 23%;
+  height: 343px;
 }
 
 .aboutus .body .card .name {
+  font-size: 14px;
+  text-align: center;
+}
+
+.aboutus .body .card .desc {
   font-size: 14px;
   text-align: center;
 }

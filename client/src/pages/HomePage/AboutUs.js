@@ -15,13 +15,13 @@ function AboutUs() {
     return (
         <div className="aboutus main-content">
             <div className="title">
-                <h1 className="text">AboutUs</h1>
+                <h1 className="text">About Us</h1>
             </div>
 
             <div className="body">
                 { data.map((aboutus, index) => {
                     return <Card img={aboutus.image} name={aboutus.name}
-                                  status ={aboutus.status}/>
+                                  desc ={aboutus.desc}/>
                 })}
             </div>
         </div>
