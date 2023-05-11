@@ -44,25 +44,10 @@ function Header({ homePage, sidebar }) {
     })
 
     return (
-        <>
+            <>
             <header>
-<<<<<<< HEAD
                 <div class="title-combo">
                     <div class="website-logo">
-=======
-                {/* <div className="image-text">
-                    <span className="icon">
-                        <i className='bx bxs-bowl-rice logo'></i>
-                    </span>
-
-                    <div className="text header-text">
-                        <span className="name">E11</span>
-                        <span className="profession">Music Web</span>
-                    </div>
-                </div> */}
-                <div className="title-combo">
-                    <div className="website-logo">
->>>>>>> 2fb0cbc3a4665c59ed42124868e5fc95f40ed9b9
                         <img src="https://cdn0.iconfinder.com/data/icons/internet-2020/1080/Applemusicandroid-512.png"/>
                     </div>
                 <div className="text header-text">
@@ -74,8 +59,6 @@ function Header({ homePage, sidebar }) {
                     </h4>
                 </div>
                 </div>
-
-                {/* <i class='bx bx-chevron-right toggle'></i> */}
             </header>
 
             <div className="menu-bar">

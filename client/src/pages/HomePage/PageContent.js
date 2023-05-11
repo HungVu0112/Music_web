@@ -86,7 +86,6 @@ function PageContent({children}) {
                 </span>
             </div>
         </div>
-<<<<<<< HEAD
     <div class="player">
             <div class="controls">
                 <i class='bx bx-shuffle'></i>
@@ -94,15 +93,6 @@ function PageContent({children}) {
                 <i class='bx bx-pause'></i>
                 <i class='bx bx-skip-next'></i>
                 <i class='bx bx-sync'></i>
-=======
-    <div className="player">
-            <div className="controls">
-                <div><i className='bx bx-shuffle'></i></div>
-                <div><i className='bx bx-skip-previous'></i></div>
-                <div><i className='bx bx-pause'></i></div>
-                <div><i className='bx bx-skip-next'></i></div>
-                <div><i className='bx bx-sync'></i></div>
->>>>>>> 2fb0cbc3a4665c59ed42124868e5fc95f40ed9b9
             </div>
             <div id="slider">
                 <div className="time">
@@ -136,8 +126,6 @@ function PageContent({children}) {
                         <i className="fas fa-expand-alt"></i>
                     </div>
                 </div>
-
-
             </footer>
         </div>
     </div>
