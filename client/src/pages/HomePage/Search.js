@@ -1,6 +1,10 @@
 function Search() {
     return (
-        <h1>Search</h1>
+        <div className="searchPage main-content">
+            <div className="title">
+                <h1 className="text">Recommend</h1>
+            </div>
+        </div>
     );
 }
 

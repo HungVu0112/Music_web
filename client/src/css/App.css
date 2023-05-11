@@ -525,6 +525,9 @@ header .image-text .header-text {
   overflow: hidden;
 }
 
+.favourite .title,
+.searchPage .title,
+.playlists .title,
 .my-playlists .title,
 .artist .title {
   display: flex;
@@ -537,20 +540,23 @@ header .image-text .header-text {
   font-size: 24px;
 }
 
+.playlists .body,
 .artist .body {
   margin-top: 32px;
-  margin-left: 16px;
 }
 
+.playlists .body .card,
 .artist .body .card {
   width: 22%;
   height: 260px;
 }
 
+.playlists .body .card .name,
 .artist .body .card .name {
   font-size: 14px;
 }
 
+.playlists .body img,
 .artist .body img {
   height: 80%;
 }
@@ -890,6 +896,26 @@ header .image-text .header-text {
 .content .navigate a:hover {
   opacity: 0.8;
 }
+
+.content .redirect-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--text--color);
+  border-radius: 50%;
+  margin-left: 16px;
+  text-decoration: none;
+}
+
+.content .redirect-back:hover {
+  opacity: 0.8;
+}
+
+.content .redirect-back i {
+  color: var(--chid-body-text-color);
+}
 /* Player */
 .bottom{
 	position: fixed;
@@ -1132,3 +1158,7 @@ h4 {
   background-image: linear-gradient(to bottom, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%), radial-gradient(at 50% 0%, rgba(255,255,255,0.10) 0%, rgba(0,0,0,0.50) 50%);
   background-blend-mode: soft-light,screen;
 }
+
+/* Playlists Page */
+
+

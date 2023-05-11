@@ -13,10 +13,8 @@ import AboutUs from './pages/HomePage/AboutUs';
 import Search from './pages/HomePage/Search';
 import Playlists from './pages/HomePage/Playlists';
 import SongsDisplay from './pages/HomePage/SongsDisplay';
+import PlaylistDisplay from './pages/HomePage/PlaylistDisplay';
 import './css/App.css';
-
-
-
 
 function App() {
   return (
@@ -33,6 +31,7 @@ function App() {
         <Route exact path='/library/favourite' element={<PageContent><Favourite /></PageContent>} />
         <Route exact path='/aboutus' element={<PageContent><AboutUs /></PageContent>} />
         <Route exact path='/playlists' element={<PageContent><Playlists /></PageContent>} />
+        <Route exact path='/playlists/:name' element={<PageContent><PlaylistDisplay /></PageContent>} />
         <Route exact path='/library/myPlaylist' element={<PageContent><MyPlaylist /></PageContent>} />
         <Route exact path='/library/myPlaylist/create' element={<PageContent><SongsDisplay /></PageContent>} />
         <Route exact path='/library/myPlaylist/:name' element={<PageContent><SongsDisplay /></PageContent>} />

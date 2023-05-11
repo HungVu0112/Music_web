@@ -143,22 +143,20 @@ function SongsDisplay() {
                                 data.songs === undefined ? <tr></tr> : (
                                     data.songs.map((song, index) => {
                                         return (
-                                            <>
-                                                <tr>
-                                                    <th scope="row">{index + 1}</th>
-                                                    <td>
-                                                        <div className="song-info">
-                                                            <div className="song-img">
-                                                                <img src={song.image} alt="img"/>
-                                                            </div>
-
-                                                            <p>{song.name}</p>
+                                            <tr key={index}>
+                                                <th scope="row">{index + 1}</th>
+                                                  <td>
+                                                     <div className="song-info">
+                                                          <div className="song-img">
+                                                            <img src={song.image} alt="img"/>
                                                         </div>
-                                                    </td>
-                                                    <td>{song.artist_name}</td>
-                                                    <td style={{ textAlign: "center" }}>2:30</td>
-                                                </tr>
-                                            </>
+
+                                                        <p>{song.name}</p>
+                                                    </div>
+                                                </td>
+                                                <td>{song.artist_name}</td>
+                                                <td style={{ textAlign: "center" }}>2:30</td>
+                                            </tr>
                                         )
                                     }
                                 )

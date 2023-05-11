@@ -1,6 +1,6 @@
 import Header from '../../components/Header';
 import { useRef, useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, redirect } from 'react-router-dom';
 
 function PageContent({children}) {
     const userJSON = sessionStorage.getItem("account");
@@ -12,8 +12,9 @@ function PageContent({children}) {
     const searchBox = useRef();
     const navigate = useRef();
     const player = useRef();
+    const redirectBack = useRef();
 
-        useEffect(() => {
+    useEffect(() => {
         if (location.pathname === "/search") {
             searchBox.current.style.display = "";
         } else searchBox.current.style.display = "none";
@@ -27,6 +28,11 @@ function PageContent({children}) {
         ) {
                 navigate.current.style.display = "";
         } else navigate.current.style.display = "none";
+
+        if (location.pathname.includes("/artists/")) {
+            redirectBack.current.style.display = "";
+        } else redirectBack.current.style.display = "none";
+
     },[location.pathname])
 
     return (
@@ -46,6 +52,10 @@ function PageContent({children}) {
                     <Link to="/library/recent">Recent</Link>
                     <Link to="/library/favourite">Favourite</Link>
                 </div>
+
+                <Link to="/artists" className="redirect-back" ref={redirectBack}>
+                    <i className='bx bx-chevron-left'></i>
+                </Link>
 
                 <div className="user-circle">
                     <img src={user.avatar} alt="user"></img>

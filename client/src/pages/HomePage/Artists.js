@@ -5,13 +5,15 @@ import axios from 'axios';
 
 function Artists() {
     const [data, setdata] = useState([]);
+    let number = 0;
+    
     useEffect(() => {
         axios.get('http://localhost:9000/artist',data)
         .then(res => {
             setdata(res.data)
         })
         .catch(err => { console.log(err) })
-    }, [])
+    }, [number])
 
     return (
         <div className="artist main-content">
@@ -21,7 +23,7 @@ function Artists() {
 
             <div className="body">
                 { data.map((artist, index) => {
-                    return <Link to={`/artists/${artist.name}`} state={artist}><Card img={artist.image} name={artist.name} key={index} /></Link>
+                    return <Link to={`/artists/${artist.name}`} state={artist} key={index}><Card img={artist.image} name={artist.name} key={index} /></Link>
                 })}
             </div>
         </div>
