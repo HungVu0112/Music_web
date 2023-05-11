@@ -5,16 +5,18 @@ import SignUp from './pages/SignUp';
 import Home from './pages/HomePage/Home';
 import PageContent from './pages/HomePage/PageContent';
 import Artists from './pages/HomePage/Artists';
+import ArtistDisplay from './pages/HomePage/ArtistDisplay';
 import RecentPlayed from './pages/HomePage/RecentPlayed';
 import Favourite from './pages/HomePage/Favourites';
 import MyPlaylist from './pages/HomePage/MyPlaylist';
 import AboutUs from './pages/HomePage/AboutUs';
 import Search from './pages/HomePage/Search';
 import Playlists from './pages/HomePage/Playlists';
+import SongsDisplay from './pages/HomePage/SongsDisplay';
 import './css/App.css';
 
 
-import SongsDisplay from './pages/HomePage/SongsDisplay';
+
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
         <Route exact path='/home' element={<PageContent><Home /></PageContent>} />
         <Route exact path='/search' element={<PageContent><Search /></PageContent>} />
         <Route exact path='/artists' element={<PageContent><Artists /></PageContent>} />
+        <Route exact path='/artists/:name' element={<PageContent><ArtistDisplay /></PageContent>} />
         <Route exact path='/library' element={<PageContent><MyPlaylist /></PageContent>} />
         <Route exact path='/library/recent' element={<PageContent><RecentPlayed /></PageContent>} />
         <Route exact path='/library/favourite' element={<PageContent><Favourite /></PageContent>} />

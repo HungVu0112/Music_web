@@ -53,12 +53,12 @@ function PageContent({children}) {
             </div>
             {children}
             
-            <footer class="bottom" id="bottom-click">
-	            <div class="active-song-description">
+            <footer className="bottom" id="bottom-click">
+	            <div className="active-song-description">
                 <div id="song-image">
                     <img src="https://www.lololyrics.com/img/cover/39824.jpeg"/>
                 </div>
-                <div class="song-desc">
+                <div className="song-desc">
                     <div>
                         Be Kind
                     </div>
@@ -66,54 +66,54 @@ function PageContent({children}) {
                         Halsey
                     </div>
                 </div>
-                <div class="heart-and-ban-icon">
+                <div className="heart-and-ban-icon">
                 <span>
-                    <i class='bx bx-heart'></i>
+                    <i className='bx bx-heart'></i>
                 </span>
                 
                 <span>
-                    <i class="fas fa-ban"></i>
+                    <i className="fas fa-ban"></i>
                 </span>
             </div>
         </div>
-    <div class="player">
-            <div class="controls">
-                <div><i class='bx bx-shuffle'></i></div>
-                <div><i class='bx bx-skip-previous'></i></div>
-                <div><i class='bx bx-pause'></i></div>
-                <div><i class='bx bx-skip-next'></i></div>
-                <div><i class='bx bx-sync'></i></div>
+    <div className="player">
+            <div className="controls">
+                <div><i className='bx bx-shuffle'></i></div>
+                <div><i className='bx bx-skip-previous'></i></div>
+                <div><i className='bx bx-pause'></i></div>
+                <div><i className='bx bx-skip-next'></i></div>
+                <div><i className='bx bx-sync'></i></div>
             </div>
             <div id="slider">
-                <div class="time">
+                <div className="time">
                     0:00
                 </div>
 
-                <div class="slidecontainer">
-                    <input type="range" min="0" max="100" value="0" class="slider" id="myRange" style={{ width: "100%" }}/>
+                <div className="slidecontainer">
+                    <input type="range" min="0" max="100" value="0" className="slider" id="myRange" style={{ width: "100%" }} onChange={() => {}}/>
                 </div>
-                <div class="time">
+                <div className="time">
                     5:10
                 </div>
             </div>
 
         </div>
 
-        <div class="extras">
+        <div className="extras">
             <div>
-                <i class='bx bx-list-ul'></i>
+                <i className='bx bx-list-ul'></i>
             </div>
             <div>
-                <i class='bx bx-laptop'></i>
+                <i className='bx bx-laptop'></i>
             </div>
             <div>
-                <i class='bx bxs-volume-full'></i>
+                <i className='bx bxs-volume-full'></i>
             </div>
-            <div class="slidecontainer" style={{ width: "30%" , marginTop:"-10px"  }}>
-                <input type="range" min="0" max="100" value="0" class="slider" id="myRange" style={{marginTop:"0px" , width: "100%" }}/>
+            <div className="slidecontainer" style={{ width: "30%" , marginTop:"-10px"  }}>
+                <input type="range" min="0" max="100" value="0" className="slider" id="myRange" style={{marginTop:"0px" , width: "100%" }} onChange={() => {}}/>
             </div>
                     <div>
-                        <i class="fas fa-expand-alt"></i>
+                        <i className="fas fa-expand-alt"></i>
                     </div>
                 </div>
 

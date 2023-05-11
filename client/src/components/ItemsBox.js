@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Card from './card.js';
+import Songcard from './Songcard.js';
 
 function ItemsBox() {
     return (
@@ -10,10 +10,10 @@ function ItemsBox() {
             </div>
 
             <div className="box-body">
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
+                <Songcard></Songcard>
+                <Songcard></Songcard>
+                <Songcard></Songcard>
+                <Songcard></Songcard>
             </div>
         </div>
     )
