@@ -56,7 +56,7 @@ function Search({ searchData }) {
     
                         {searchData.length === 0 ? (data.current.length === 0 ? "" : 
                         <>    
-                            <h2 className="text">・Top Songs</h2>
+                            <h2 className="text">・Top 4 Songs</h2>
                             <div className="box scroll-bar">
                                 {data.current.map((song, index) => {
                                     if (song.type !== undefined) {
@@ -87,11 +87,11 @@ function Search({ searchData }) {
     
                         {searchData.length === 0 ? (data.current.length === 0 ? "" :
                         <>    
-                            <h2 className="text">・Top Artists</h2>
+                            <h2 className="text">・Top 4 Artists</h2>
                             <div className="box scroll-bar">
                                 {data.current.map((artist, index) => {
                                     if (artist.type === undefined) {
-                                        if (index < artistAmount.current) {
+                                        if (index < 4) {
                                             return <Link to={`/artists/${artist.name}`} state={artist} key={index}><Card name={artist.name} img={artist.image}/></Link>
                                         }
                                     }
