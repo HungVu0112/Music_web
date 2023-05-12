@@ -6,7 +6,11 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-/* nguuuuuu */
+
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   /* Colors */
   --body-color: #E4E9F7;
@@ -502,7 +506,7 @@ header .image-text .header-text {
   border-radius: 6px;
   padding: 8px;
   margin: 8px 8px;
-  float: left;
+  float:  left;
   cursor: pointer;
 }
 
@@ -1189,4 +1193,52 @@ h4 {
 .playlistPage .heading {
   background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
 }
+
+/* Search Page */
+.searchPage .page-body {
+  padding: 16px;
+}
+
+.searchPage .page-body .search-element {
+  margin-top: 32px;
+}
+
+.searchPage .page-body .box {
+  display: flex;
+}
+
+.searchPage .page-body .box .card {
+  text-decoration: none;
+  width: 25%;
+  height: 300px;
+}
+
+.searchPage .page-body .box .card img {
+  height: 80%;
+}
+
+.searchPage .page-body .box .card .card-body {
+  margin-top: 2px;
+  font-size: 14px;
+}
+
+.searchPage .page-body .box a {
+  margin-right: 16px;
+  width: 22%;
+  text-decoration: none;
+}
+
+.searchPage .page-body .box a .card {
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
 

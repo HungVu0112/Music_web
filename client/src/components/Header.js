@@ -74,7 +74,7 @@ function Header({ homePage, sidebar }) {
                         <li className="nav-link">
                             <Link to='/search' replace>
                                 <i className='bx bx-search icons'></i>
-                                <span className="text nav-text">Seach</span>
+                                <span className="text nav-text">Search</span>
                             </Link>
                         </li>
                         <li className="nav-link">

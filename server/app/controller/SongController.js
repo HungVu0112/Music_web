@@ -1,4 +1,6 @@
 const Song = require('../model/Song');
+const Artist = require('../model/Artist');
+const CircularJSON = require('circular-json');
 
 class SongController{
     getSongsbyartistName(req, res, next) {
@@ -8,6 +10,53 @@ class SongController{
                 res.json(songs);
             })
             .catch(next);
+    }
+
+    getTopSong(req, res, next) {
+        Song.find().sort({ like: -1 })
+            .then(songs => {
+                res.json(songs);
+            })
+            .catch(next);
+    }
+
+    getTopArtist(req, res, next) {
+        Song.aggregate([
+            { $group: {
+              _id: "$artist_name",
+              totalLikes: { $sum: "$like" }
+            }},
+            { $sort: { totalLikes: -1 } }
+          ])
+          .then(songs => {
+            res.json(songs);
+          })
+          .catch(next);
+    }
+
+    getTops(req, res, next) {
+        Promise.all([Song.find().sort({ like: -1 }), Song.aggregate([
+            { $group: {
+              _id: "$artist_name",
+              totalLikes: { $sum: "$like" }
+            }},
+            { $sort: { totalLikes: -1 } }
+          ])])
+          .then(([songs, artists]) => {
+            const artistArr = artists.map(artist => {
+                return Artist.findOne({ name: artist._id }).lean().exec()
+                    .then(artistObj => {
+                        return CircularJSON.parse(CircularJSON.stringify(artistObj));
+                    });
+            });
+        
+            Promise.all(artistArr)
+                .then(result => {
+                    res.json(result.concat(songs));
+                })
+                .catch(next);
+          })
+          .catch(next);
     }
 }
 

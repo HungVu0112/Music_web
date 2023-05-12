@@ -1,12 +1,15 @@
 import Header from '../../components/Header';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useLocation, Link, redirect } from 'react-router-dom';
+import Search from './Search';
+import axios from 'axios';
 
 function PageContent({children}) {
     const userJSON = sessionStorage.getItem("account");
     const user = JSON.parse(userJSON);
     const location = useLocation();
 
+    const [searchResult, setSearchResult] = useState([]);
     const homePage = useRef();
     const sidebar = useRef();
     const searchBox = useRef();
@@ -14,6 +17,24 @@ function PageContent({children}) {
     const player = useRef();
     const redirectBack1 = useRef();
     const redirectBack2 = useRef();
+
+    const handleSearch = (e) => {
+        const value = e.target.value;
+
+        if (value !== "") {
+            axios.get(`http://localhost:9000/getAll/${value}`, searchResult)
+                .then(res => {
+                    setSearchResult(res.data);
+                })
+                .catch(err => {console.log(err);})
+        } else {
+            setSearchResult(new Array(0));
+        }
+    }   
+
+    useEffect(() => {
+        document.documentElement.scrollTop = 0;
+    }, [location.pathname])
 
     useEffect(() => {
         if (location.pathname === "/search") {
@@ -49,7 +70,7 @@ function PageContent({children}) {
             <div className="info-bar">
                 <div className="search-box" ref={searchBox}>
                     <i className='bx bx-search-alt'></i>
-                    <input type="text" placeholder="Search..." />
+                    <input type="text" placeholder="Search..." onChange={handleSearch}/>
                 </div>
 
                 <div className="navigate" ref={navigate}>
@@ -70,8 +91,9 @@ function PageContent({children}) {
                     <img src={user.avatar} alt="user"></img>
                 </div>
             </div>
-            {children}
-            
+
+            {location.pathname === "/search" ? <Search searchData={searchResult}/> : children}            
+
             <footer className="bottom" id="bottom-click">
 	            <div className="active-song-description">
                 <div id="song-image">

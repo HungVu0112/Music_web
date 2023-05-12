@@ -40,7 +40,7 @@ function Login() {
         <div className='login'>
             <div className='form'>
                 <div className='form-header'>
-                    <div class="website-logo">
+                    <div className="website-logo">
                         <img src="https://cdn0.iconfinder.com/data/icons/internet-2020/1080/Applemusicandroid-512.png"/>
                     </div>
                     Login

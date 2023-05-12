@@ -3,6 +3,7 @@ const artistRouter = require('./artist');
 const aboutusRouter = require('./aboutus');
 const playlistRouter = require('./playlist');
 const songRouter = require('./song');
+const searchRouter = require('./searchAll');
 
 function route(app) {
     app.use('/', userRouter);
@@ -10,6 +11,7 @@ function route(app) {
     app.use('/', aboutusRouter);
     app.use('/', playlistRouter);
     app.use('/', songRouter);
+    app.use('/', searchRouter);
 }
 
 module.exports = route;
