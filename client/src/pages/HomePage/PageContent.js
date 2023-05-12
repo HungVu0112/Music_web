@@ -87,9 +87,9 @@ function PageContent({children}) {
                     <i className='bx bx-chevron-left'></i>
                 </Link>
 
-                <div className="user-circle">
+                <Link to='/user' state={user} className="user-circle">
                     <img src={user.avatar} alt="user"></img>
-                </div>
+                </Link>
             </div>
 
             {location.pathname === "/search" ? <Search searchData={searchResult}/> : children}            
