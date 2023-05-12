@@ -15,6 +15,7 @@ import Playlists from './pages/HomePage/Playlists';
 import SongsDisplay from './pages/HomePage/SongsDisplay';
 import PlaylistDisplay from './pages/HomePage/PlaylistDisplay';
 import './css/App.css';
+import User from './pages/HomePage/User';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route exact path='/library/myPlaylist' element={<PageContent><MyPlaylist /></PageContent>} />
         <Route exact path='/library/myPlaylist/create' element={<PageContent><SongsDisplay /></PageContent>} />
         <Route exact path='/library/myPlaylist/:name' element={<PageContent><SongsDisplay /></PageContent>} />
+        <Route exact path='/user' element={<PageContent><User /></PageContent>} />
       </Routes>
     </div>
   );
