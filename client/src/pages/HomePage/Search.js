@@ -59,6 +59,7 @@ function Search({ searchData }) {
                                 {data.current.map((song, index) => {
                                     if (song.type !== undefined) {
                                         if (index < artistAmount.current + 4) {
+                                            console.log(song)
                                             return <Songcard song={song} key={index}/>
                                         }
                                     }

@@ -11,6 +11,7 @@ function ArtistDisplay() {
     const dispatch = useDispatch();
 
     const handlePlay = (index) => {
+        console.log(songs[index])
         dispatch(setCurrentPlaying(songs[index]));
     }
 
@@ -30,7 +31,7 @@ function ArtistDisplay() {
                 </div>
                 <h1>{artist.name}</h1>
             </div>
-
+            
             <div className="body">
                 <div className="tool-bar">
                     <i className='bx bx-play play' ></i>

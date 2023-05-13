@@ -5,7 +5,7 @@ import ControlsButton from './ControlsButton';
 import Slider from "@material-ui/core/Slider";
 
 function Footer(props) {
-    const [currTrack, setCurrTrack] = useState(props.music);
+    const [currTrack, setCurrTrack] = useState();
     const [isRepeatClicked, setRepeatClick] = useState(false);
     const [isPrevClicked, setPrevClicked] = useState(false);
     const [isNextClicked, setNextClicked] = useState(false);
@@ -15,6 +15,7 @@ function Footer(props) {
     const [seekTime, setSeekTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [currTime, setCurrTime] = useState(0);
+    const src = `http://localhost:3000/${props.music.sound}`;
 
     const audioElement = useRef();
     const dispatch = useDispatch();
@@ -57,18 +58,18 @@ function Footer(props) {
             : audioElement.current.pause();
         audioElement.current.loop = isRepeatClicked;
         audioElement.current.volume = volume / 100;
-        audioElement.current.muted = isVolumeClicked;  
-        audioElement.current.oncanplaythrough = () => {
-            if (audioElement.current != null) {
-                setDuration(audioElement.current.duration);
-            }
+        audioElement.current.muted = isVolumeClicked;
+        console.log(audioElement.current.src)
+        audioElement.current.onloadedmetadata = () => {
+            if (audioElement.current != null)
+                setDuration(audioElement.current.duration)
         };
         setInterval(() => {
             if (audioElement.current !== null)
                 setCurrTime(audioElement.current.currentTime);
         })
     });
-
+    
     useEffect(() => {
         setCurrTrack(props.music);
     }, [props.music]);
@@ -82,8 +83,8 @@ function Footer(props) {
             setNextClicked(true);
         };
     })
-
-    // useEffect(()=>{
+    
+     // useEffect(()=>{
     //     if (isNextClicked){
     //         let currTrackId = (id+1) % props.playlist.length;
     //         dispatch(setCurrentPlaying(props.playlist[currTrackId]));
@@ -139,7 +140,7 @@ function Footer(props) {
                                     changeIcon={<i class='bx bx-skip-previous'></i>}
                                     onClicked={handleToggle}/>
 
-                    <audio ref={audioElement} src={props.music.sound}/>
+                    <audio ref={audioElement} src={src}/>
 
                     <ControlsButton type={"play-pause"} 
                                     defaultIcon={<i class='bx bx-play'></i>}
