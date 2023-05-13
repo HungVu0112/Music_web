@@ -10,10 +10,10 @@ function ItemsBox() {
             </div>
 
             <div className="box-body">
-                <Songcard></Songcard>
-                <Songcard></Songcard>
-                <Songcard></Songcard>
-                <Songcard></Songcard>
+                <Songcard song={{}}></Songcard>
+                <Songcard song={{}}></Songcard>
+                <Songcard song={{}}></Songcard>
+                <Songcard song={{}}></Songcard>
             </div>
         </div>
     )

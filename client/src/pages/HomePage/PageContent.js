@@ -1,7 +1,9 @@
 import Header from '../../components/Header';
 import { useRef, useEffect, useState } from 'react';
 import { useLocation, Link, redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Search from './Search';
+import Footer from '../../components/Footer';
 import axios from 'axios';
 
 function PageContent({children}) {
@@ -10,11 +12,13 @@ function PageContent({children}) {
     const location = useLocation();
 
     const [searchResult, setSearchResult] = useState([]);
+    const [currMusic, setCurrMusic] = useState(null);
+    const [currPlaylist, setCurrentPlaylist] = useState(null);
+
     const homePage = useRef();
     const sidebar = useRef();
     const searchBox = useRef();
     const navigate = useRef();
-    const player = useRef();
     const redirectBack1 = useRef();
     const redirectBack2 = useRef();
 
@@ -61,6 +65,12 @@ function PageContent({children}) {
 
     },[location.pathname])
 
+    const { playing } = useSelector(state => state.MusicReducer);
+
+    useEffect(() => {
+        setCurrMusic(playing);
+    },[playing])
+
     return (
     <div className='homepage dark'  ref={homePage}>
         <div className='sidebar' ref={sidebar}>
@@ -94,72 +104,10 @@ function PageContent({children}) {
 
             {location.pathname === "/search" ? <Search searchData={searchResult}/> : children}            
 
-            <footer className="bottom" id="bottom-click">
-	            <div className="active-song-description">
-                <div id="song-image">
-                    <img src="https://www.lololyrics.com/img/cover/39824.jpeg"/>
-                </div>
-                <div className="song-desc">
-                    <div>
-                        Be Kind
-                    </div>
-                    <div >
-                        Halsey
-                    </div>
-                </div>
-                <div className="heart-and-ban-icon">
-                <span>
-                    <i className='bx bx-heart'></i>
-                </span>
-                
-                <span>
-                    <i className="fas fa-ban"></i>
-                </span>
+            {currMusic ? 
+                <Footer music={currMusic} playlist={currPlaylist} />
+            : ""}
 
-            </div>
-        </div>
-
-            <div className="player">
-                <div className="controls">
-                    <div><i className='bx bx-shuffle'></i></div>
-                    <div><i className='bx bx-skip-previous'></i></div>
-                    <div><i className='bx bx-pause'></i></div>
-                    <div><i className='bx bx-skip-next'></i></div>
-                    <div><i className='bx bx-sync'></i></div>
-                </div>
-                <div id="slider">
-                    <div className="time">
-                        0:00
-                    </div>
-
-                    <div className="slidecontainer">
-                        <input type="range" min="0" max="100" value="0" className="slider" id="myRange" style={{ width: "100%" }} onChange={() => {}}/>
-                    </div>
-                    <div className="time">
-                        5:10
-                    </div>
-                </div>
-
-            </div>
-
-            <div className="extras">
-                <div>
-                    <i className='bx bx-list-ul'></i>
-                </div>
-                <div>
-                    <i className='bx bx-laptop'></i>
-                </div>
-                <div>
-                    <i className='bx bxs-volume-full'></i>
-                </div>
-                <div className="slidecontainer" style={{ width: "30%" , marginTop:"-10px"  }}>
-                    <input type="range" min="0" max="100" value="0" className="slider" id="myRange" style={{marginTop:"0px" , width: "100%" }} onChange={() => {}}/>
-                </div>
-                        <div>
-                            <i className="fas fa-expand-alt"></i>
-                        </div>
-            </div>
-        </footer>
         </div>
     </div>
     )

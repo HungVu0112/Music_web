@@ -1,11 +1,18 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCurrentPlaying } from "../../actions/actions";
 import axios from 'axios';
 
 function ArtistDisplay() {
     const location = useLocation();
     const [songs, setSongs] = useState();
     const artist = location.state;
+    const dispatch = useDispatch();
+
+    const handlePlay = (index) => {
+        dispatch(setCurrentPlaying(songs[index]));
+    }
 
     useEffect(() => {
         axios.get(`http://localhost:9000/songs/${location.state.name}`, songs)
@@ -51,7 +58,7 @@ function ArtistDisplay() {
                             {songs === undefined ? <tr></tr> : (
                                     songs.map((song, index) => {
                                         return (
-                                            <tr key={index}>
+                                            <tr key={index} onClick={() => handlePlay(index)}>
                                                 <th scope="row">{index + 1}</th>
                                                 <td>
                                                     <div className="song-info">

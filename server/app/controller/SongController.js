@@ -12,28 +12,6 @@ class SongController{
             .catch(next);
     }
 
-    getTopSong(req, res, next) {
-        Song.find().sort({ like: -1 })
-            .then(songs => {
-                res.json(songs);
-            })
-            .catch(next);
-    }
-
-    getTopArtist(req, res, next) {
-        Song.aggregate([
-            { $group: {
-              _id: "$artist_name",
-              totalLikes: { $sum: "$like" }
-            }},
-            { $sort: { totalLikes: -1 } }
-          ])
-          .then(songs => {
-            res.json(songs);
-          })
-          .catch(next);
-    }
-
     getTops(req, res, next) {
         Promise.all([Song.find().sort({ like: -1 }), Song.aggregate([
             { $group: {
