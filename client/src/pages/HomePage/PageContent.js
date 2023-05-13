@@ -65,12 +65,17 @@ function PageContent({children}) {
 
     },[location.pathname])
 
-    const { playing } = useSelector(state => state.MusicReducer);
+    const { playing, playlists } = useSelector(state => state.MusicReducer);
+    
 
     useEffect(() => {
         setCurrMusic(playing);
     },[playing])
 
+    useEffect(() => {
+        setCurrentPlaylist(playlists);
+    },[playlists])
+    
     return (
     <div className='homepage dark'  ref={homePage}>
         <div className='sidebar' ref={sidebar}>

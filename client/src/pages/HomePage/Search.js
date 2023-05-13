@@ -59,8 +59,7 @@ function Search({ searchData }) {
                                 {data.current.map((song, index) => {
                                     if (song.type !== undefined) {
                                         if (index < artistAmount.current + 4) {
-                                            console.log(song)
-                                            return <Songcard song={song} key={index}/>
+                                            return <Songcard song={song} key={index} playlist={data.current} artistAmount={artistAmount.current} index={index}/>
                                         }
                                     }
                                 })}
@@ -72,7 +71,7 @@ function Search({ searchData }) {
                                 <div className="box scroll-bar">
                                     {songs.map((song, index) => {
                                         if (index < 4) {
-                                            return <Songcard song={song} key={index}/>
+                                            return <Songcard song={song} key={index} playlist={songs} index={index}/>
                                         }
                                     })}
                                 </div>

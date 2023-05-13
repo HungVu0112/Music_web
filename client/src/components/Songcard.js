@@ -1,11 +1,25 @@
 import { useDispatch } from "react-redux";
-import { setCurrentPlaying } from '../actions/actions';
+import { setCurrentPlaying, setPlaylist } from '../actions/actions';
 
 function Songcard(props) {
     const dispatch = useDispatch();
-
     const handlePlay = () => {
-        dispatch(setCurrentPlaying(props.song));
+        if (props.artistAmount !== undefined) {
+            const index = props.index - props.artistAmount;
+            const song = {...props.song, index: index};
+            const playlist = props.playlist.slice(props.artistAmount).map((song, index) => {
+                return {...song, index: index};
+            })
+            dispatch(setCurrentPlaying(song));
+            dispatch(setPlaylist(playlist));
+        } else {
+            const song = {...props.song, index: props.index}
+            const playlist = props.playlist.map((song, index) => {
+                return {...song, index: index};
+            })
+            dispatch(setCurrentPlaying(song));
+            dispatch(setPlaylist(playlist));
+        }
     }
 
     return (

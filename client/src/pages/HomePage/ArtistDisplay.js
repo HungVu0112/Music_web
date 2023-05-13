@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setCurrentPlaying } from "../../actions/actions";
+import { setCurrentPlaying, setPlaylist } from "../../actions/actions";
 import axios from 'axios';
 
 function ArtistDisplay() {
@@ -11,14 +11,22 @@ function ArtistDisplay() {
     const dispatch = useDispatch();
 
     const handlePlay = (index) => {
-        console.log(songs[index])
         dispatch(setCurrentPlaying(songs[index]));
+        dispatch(setPlaylist(songs));
+    }
+
+    const handleClickPlay = () => {
+        dispatch(setCurrentPlaying(songs[0]));
+        dispatch(setPlaylist(songs));
     }
 
     useEffect(() => {
         axios.get(`http://localhost:9000/songs/${location.state.name}`, songs)
             .then(res => {
-                setSongs(res.data);
+                const playlist = res.data.map((song, index) => {
+                    return {...song, index: index}
+                })
+                setSongs(playlist);
             })
             .catch(err => {console.log(err);})
     }, [location.state]);
@@ -34,7 +42,7 @@ function ArtistDisplay() {
             
             <div className="body">
                 <div className="tool-bar">
-                    <i className='bx bx-play play' ></i>
+                    <i className='bx bx-play play' onClick={handleClickPlay}></i>
                     <i className='bx bxs-heart like'></i>
                 </div>
 

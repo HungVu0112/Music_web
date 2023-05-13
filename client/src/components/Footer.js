@@ -9,7 +9,7 @@ function Footer(props) {
     const [isRepeatClicked, setRepeatClick] = useState(false);
     const [isPrevClicked, setPrevClicked] = useState(false);
     const [isNextClicked, setNextClicked] = useState(false);
-    const [isPlaying, setPlayPauseClicked] = useState(false);
+    const [isPlaying, setPlayPauseClicked] = useState(true);
     const [isVolumeClicked, setVolumeClicked] = useState(false);
     const [volume, setVolume] = useState(50);
     const [seekTime, setSeekTime] = useState(0);
@@ -59,10 +59,9 @@ function Footer(props) {
         audioElement.current.loop = isRepeatClicked;
         audioElement.current.volume = volume / 100;
         audioElement.current.muted = isVolumeClicked;
-        console.log(audioElement.current.src)
         audioElement.current.onloadedmetadata = () => {
             if (audioElement.current != null)
-                setDuration(audioElement.current.duration)
+                setDuration(audioElement.current.duration);
         };
         setInterval(() => {
             if (audioElement.current !== null)
@@ -79,26 +78,31 @@ function Footer(props) {
     }, [currTime, duration]);
 
     useEffect(()=>{
-        audioElement.current.onended = ()=> {
-            setNextClicked(true);
-        };
+        if (isRepeatClicked === false) {
+            audioElement.current.onended = ()=> {
+                setNextClicked(true);
+            };
+        }
     })
     
-     // useEffect(()=>{
-    //     if (isNextClicked){
-    //         let currTrackId = (id+1) % props.playlist.length;
-    //         dispatch(setCurrentPlaying(props.playlist[currTrackId]));
-    //         setNextClicked(false);
-    //     }
-    //     if (isPrevClicked){
-    //         let currTrackId = (id-1) % playlists.length;
-    //         if ((id-1)<0){
-    //             currTrackId = playlists.length - 1;
-    //         }
-    //         dispatch(setCurrentPlaying(playlists[currTrackId]));
-    //         setPrevClicked(false);
-    //     }
-    // },[dispatch, id, isNextClicked, isPrevClicked, playlists]);
+     useEffect(()=>{
+        if (isNextClicked){
+            let currTrackId = props.music.index + 1;
+            if (currTrackId === props.playlist.length) {
+                currTrackId = 0;
+            }
+            dispatch(setCurrentPlaying(props.playlist[currTrackId]));
+            setNextClicked(false);
+        }
+        if (isPrevClicked){
+            let currTrackId = props.music.index - 1;
+            if (currTrackId < 0){
+                currTrackId = props.playlist.length - 1;
+            }
+            dispatch(setCurrentPlaying(props.playlist[currTrackId]));
+            setPrevClicked(false);
+        }
+    },[dispatch, isNextClicked, isPrevClicked, props.playlist]);
 
     function formatTime(secs) {
         const t = new Date(1970, 0, 1);
@@ -131,26 +135,26 @@ function Footer(props) {
 
                 <div className="playback-controls">
                     <ControlsButton type={"repeat"} 
-                                    defaultIcon={<i class='bx bx-repeat'></i>}
-                                    changeIcon={<i class='bx bx-repeat' style={{color: "blue"}}></i>}
+                                    defaultIcon={<i className='bx bx-repeat'></i>}
+                                    changeIcon={<i className='bx bx-repeat' style={{color: "blue"}}></i>}
                                     onClicked={handleToggle}/>
 
                     <ControlsButton type={"prev"} 
-                                    defaultIcon={<i class='bx bx-skip-previous'></i>}
-                                    changeIcon={<i class='bx bx-skip-previous'></i>}
-                                    onClicked={handleToggle}/>
+                                    defaultIcon={<i className='bx bx-skip-previous'></i>}
+                                    changeIcon={<i className='bx bx-skip-previous'></i>}
+                                    onClicked={handleToggle} playlist={props.playlist}/>
 
                     <audio ref={audioElement} src={src}/>
 
                     <ControlsButton type={"play-pause"} 
-                                    defaultIcon={<i class='bx bx-play'></i>}
-                                    changeIcon={<i class='bx bx-pause'></i>}
-                                    onClicked={handleToggle}/>
+                                    defaultIcon={<i className='bx bx-pause'></i>}
+                                    changeIcon={<i className='bx bx-play'></i>}
+                                    onClicked={handleToggle} />
 
                     <ControlsButton type={"next"} 
-                                    defaultIcon={<i class='bx bx-skip-next' />}
-                                    changeIcon={<i class='bx bx-skip-next'></i>}
-                                    onClicked={handleToggle}/>
+                                    defaultIcon={<i className='bx bx-skip-next' />}
+                                    changeIcon={<i className='bx bx-skip-next'></i>}
+                                    onClicked={handleToggle} playlist={props.playlist}/>
                 </div>
 
                 <div className="playback-widgets">
@@ -164,8 +168,8 @@ function Footer(props) {
                     </div>
 
                     <ControlsButton type={"volume"} 
-                                    defaultIcon={<i class='bx bx-volume-full'></i>}
-                                    changeIcon={<i class='bx bx-volume-mute'></i>}
+                                    defaultIcon={<i className='bx bx-volume-full'></i>}
+                                    changeIcon={<i className='bx bx-volume-mute'></i>}
                                     onClicked={handleToggle} className="volumeBtn"/>
 
                     <div className="slider">

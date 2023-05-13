@@ -1107,7 +1107,7 @@ background-blend-mode: soft-light,screen;
 .player .curr-song-container {
   display: flex;
   align-items: center;
-  width: 30%;
+  width: 32%;
   margin: 0 16px;
 }
 
