@@ -183,7 +183,7 @@ function Footer(props) {
                 <div className="playback-controls">
                     <ControlsButton type={"repeat"} 
                                     defaultIcon={<i className='bx bx-repeat'></i>}
-                                    changeIcon={<i className='bx bx-repeat' style={{color: "blue"}}></i>}
+                                    changeIcon={<i className='bx bx-repeat' style={{color: "red"}}></i>}
                                     onClicked={handleToggle}/>
 
                     <ControlsButton type={"prev"} 
@@ -202,6 +202,11 @@ function Footer(props) {
                                     defaultIcon={<i className='bx bx-skip-next' />}
                                     changeIcon={<i className='bx bx-skip-next'></i>}
                                     onClicked={handleToggle} playlist={props.playlist}/>
+
+                    <ControlsButton 
+                                    defaultIcon={<i className='bx bx-shuffle'></i>}
+                                    changeIcon={<i className='bx bx-shuffle'></i>}
+                                    onClicked={handleToggle} playlist={props.playlist} style={{color: "red"}}/>
                 </div>
 
                 <div className="playback-widgets">

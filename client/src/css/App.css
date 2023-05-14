@@ -1217,6 +1217,7 @@ background-blend-mode: soft-light,screen;
   width: 32%;
   align-items: center;
   justify-content: center;
+  margin-left: -32px;
 }
 
 .player .playback-controls button {
@@ -1235,6 +1236,7 @@ background-blend-mode: soft-light,screen;
   display: flex;
   align-items: center;
   width: 38%;
+  margin-left: 32px;
 }
 
 .content .player .playback-widgets .timer {
