@@ -1,18 +1,24 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
+import ChangePasswordValidation from "../../Validation/ChangePasswordValidation";
 import axios from 'axios';
 
 function User(){
     const userJSON = sessionStorage.getItem("account");
     const user = JSON.parse(userJSON);
-    const btnChange = useRef();
     const form = useRef();
     const close = useRef();
-    const [data,setData] = useState(user);
+    const pwForm = useRef();
+    const [data,setData] = useState(user)
     const [info, setInfo] = useState({
         username: user.username,
         avatar: user.avatar,
     });
+    const [password, setPassword] = useState({
+        oldpassword: '',
+        newpassword: '',
+    });
+    const [err, setErr] = useState({});
 
     const [reRender, setRerender] = useState(0);
 
@@ -20,8 +26,16 @@ function User(){
         form.current.style.display = "block";
     }
 
-    const handleClose = () => {
+    const handleOpen = () => {
+        pwForm.current.style.display = "block";
+    }
+
+    const handleClose1 = () => {
         form.current.style.display = "none";
+    }
+
+    const handleClose2 = () => {
+        pwForm.current.style.display = "none";
     }
 
     const handleSubmit = () => {
@@ -33,9 +47,28 @@ function User(){
             })
     }
 
+    const handleSubmit2 = () => {
+        if (err.oldpassword === '' && err.newpassword === '') {
+            axios.get(`http://localhost:9000/user/changepw/${data.username}&${password.newpassword}`)
+                .then(res => {
+                    pwForm.current.style.display = "none";
+                    alert("Password changed!");
+                    setRerender(n => n + 1);
+                })
+        }
+    }
+
     const handleInput = (e) => {
         setInfo(prev => ({...prev, [e.target.name] : e.target.value}));
     }
+
+    const handleInput2 = (e) => {
+        setPassword(prev => ({...prev, [e.target.name] : e.target.value}));
+    }
+
+    useEffect(() => {
+        setErr(ChangePasswordValidation(password, user.password));
+    },[password])
 
     useEffect(() => {
         axios.get(`http://localhost:9000/user/${info.username}`)
@@ -46,20 +79,35 @@ function User(){
             })
     }, [reRender])
 
-
     return (
         <>
             <div className="userPage main-content" >  
                 <div className="heading">
-                    <div className="image" ref={btnChange} onClick={handleClick}>
+                    <div className="image" onClick={handleClick}>
                         <img src={data.avatar} alt="img" />
                         <i class='bx bx-edit'></i>
                     </div>
                     <h1>{data.username}</h1>
                 </div>
+                
+                <div className="body">
+                    <h1 className="text">Information</h1>
+                    <div className="body-info">
+                        <h3 className="text">・Username: {data.username}</h3>
+                        <h3 className="text">・Email: {data.email}</h3>
+                    </div>
+                    <button onClick={handleOpen}>Change Password</button>
+                </div>
+
+                <div className="navigate">
+                    <Link to='/library'>Library</Link>
+                    <Link to='/library/recent'>Recent</Link>
+                    <Link to='/library/favourite'>Favourite</Link>
+                </div>
             </div>
+
             <div className="info-form" ref={form}>
-                <div className="close-btn" ref={close} onClick={handleClose}>
+                <div className="close-btn" ref={close} onClick={handleClose1}>
                     <i className='bx bxs-tag-x'></i>
                 </div>
 
@@ -76,7 +124,7 @@ function User(){
 
                     <div className="username">
                         <div className="header">
-                            <label for="name">Input</label>
+                            <label htmlFor="name">Name</label>
                             <i className='bx bx-edit-alt'></i>
                         </div>
 
@@ -86,6 +134,36 @@ function User(){
                 
                 <div className="submit-btn">
                     <button onClick={handleSubmit}>Save</button>
+                </div>
+            </div>
+
+            <div className="change-password-form" ref={pwForm}>
+                <div className="close-btn" ref={close} onClick={handleClose2}>
+                    <i className='bx bxs-tag-x'></i>
+                </div>
+
+                <div className="head">
+                    <h1>CHANGE PASSWORD</h1>
+                </div>
+                
+                <div className="body">
+                    <div className="image">
+                        <i className='bx bxs-lock-open-alt'></i>
+                    </div>
+
+                    <div className="main">
+                        <label htmlFor="op">Old Password</label>
+                        <input type="password" placeholder="Type your old password ..." name="oldpassword" id="op" onChange={handleInput2}/>
+                        {err.oldpassword && <p style={{color : "red"}}>* {err.oldpassword}</p>}
+
+                        <label htmlFor="np">New Password</label>
+                        <input type="password" placeholder="Type your new password ..." name="newpassword" id="np" onChange={handleInput2}/>
+                        {err.newpassword && <p style={{color : "red"}}>* {err.newpassword}</p>}
+
+                    </div>
+                </div>
+                <div className="submit-btn">
+                    <button onClick={handleSubmit2}>Save</button>
                 </div>
             </div>
         </>

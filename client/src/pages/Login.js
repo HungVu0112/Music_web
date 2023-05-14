@@ -10,6 +10,7 @@ function Login() {
         email: '',
         password: ''
     });
+    
     const [err, setErr] = useState({});
 
     const handleInput = (e) => {

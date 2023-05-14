@@ -15,6 +15,31 @@ class UserController {
             .catch(next)
     }
 
+    changeInfoPlaylist(req, res, next) {
+        User.findOne({ username: req.params.username })
+            .then(user => {
+                user.playlists.forEach(playlist => {
+                    if (playlist.name === req.params.name) {
+                        playlist.name = req.params.newname;
+                        playlist.image = req.params.link;
+                    }
+                })
+                user.save();
+                res.json("succeed!"); 
+            })
+            .catch(next)
+    }
+
+    changePw(req, res, next) {
+        User.findOne({ username: req.params.username })
+            .then(user => {
+                user.password = req.params.newpassword;
+                user.save();
+                res.json("succeed!");
+            })
+            .catch(next);
+    }
+
     checkLogin(req, res, next) {
         User.findOne(req.body)
             .then(user => {
@@ -213,6 +238,8 @@ class UserController {
                         }
                     });
                     user.save();
+                    --song.like;
+                    song.save();
                     res.json("Deleted");
                 } else {
                     res.json("Failed");

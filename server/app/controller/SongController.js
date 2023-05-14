@@ -13,7 +13,7 @@ class SongController{
     }
 
     getTops(req, res, next) {
-        Promise.all([Song.find().sort({ like: -1 }), Song.aggregate([
+        Promise.all([Song.find().sort({ like: -1 }).limit(4), Song.aggregate([
             { $group: {
               _id: "$artist_name",
               totalLikes: { $sum: "$like" }
