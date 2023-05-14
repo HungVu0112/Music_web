@@ -17,6 +17,16 @@ class UserController {
             .catch(next)
     }
 
+    changeInfo(req, res, next) {
+        User.findOne({ username: req.params.username })
+            .then(user => {
+                user.username = req.params.newusername;
+                user.save();
+                res.json("succeed!"); 
+            })
+            .catch(next)
+    }
+
     checkSignup(req, res, next) {
         User.findOne(req.body)
           .then(user => {

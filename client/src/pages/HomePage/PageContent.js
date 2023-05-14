@@ -102,7 +102,7 @@ function PageContent({children}) {
                     <i className='bx bx-chevron-left'></i>
                 </Link>
 
-                <Link to='/user' state={user} className="user-circle">
+                <Link to='/user' className="user-circle">
                     <img src={user.avatar} alt="user"></img>
                 </Link>
             </div>

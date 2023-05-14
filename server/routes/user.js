@@ -16,6 +16,8 @@ router.get('/user/playlist/searchSong/:name&:playlistName&:username', userContro
 router.get('/user/playlist/addSong/:name&:playlistName&:username', userController.addSong);
 router.get('/user/playlist/delete/:id&:username', userController.deletePlaylist);
 router.get('/user/playlist/:name&:username', userController.getPlaylist);
+router.get('/user/changeinfo/:username&:newusername', userController.changeInfo);
 router.get('/user/:username', userController.getUser);
+
 
 module.exports = router;
