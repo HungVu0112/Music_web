@@ -79,7 +79,7 @@ function Search({ searchData }) {
                         }         
                     </div>
                     
-                    <div className="search-element">
+                    <div className="search-element artist-element">
                         
     
                         {searchData.length === 0 ? (data.current.length === 0 ? "" :

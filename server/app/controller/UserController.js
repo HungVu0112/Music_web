@@ -4,6 +4,17 @@ const Song = require('../model/Song');
 const Artist = require('../model/Artist');
 
 class UserController {
+    changeInfo(req, res, next) {
+        User.findOne({ username: req.params.username })
+            .then(user => {
+                user.username = req.params.newusername;
+                user.avatar = req.params.newavatar;
+                user.save();
+                res.json("succeed!"); 
+            })
+            .catch(next)
+    }
+
     checkLogin(req, res, next) {
         User.findOne(req.body)
             .then(user => {
@@ -13,16 +24,6 @@ class UserController {
                 else {
                     res.json('not exists');
                 }
-            })
-            .catch(next)
-    }
-
-    changeInfo(req, res, next) {
-        User.findOne({ username: req.params.username })
-            .then(user => {
-                user.username = req.params.newusername;
-                user.save();
-                res.json("succeed!"); 
             })
             .catch(next)
     }
@@ -159,7 +160,9 @@ class UserController {
                 if (song) {
                     user.favourite.songs.push(song);
                     user.save();
-                    res.json("Added");
+                    ++song.like;
+                    song.save();
+                    res.json(song.like);
                 } else {
                     res.json("Failed");
                 }

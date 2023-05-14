@@ -11,6 +11,7 @@ function Footer(props) {
     const [newUser, setNewUser] = useState(user);
     const [currTrack, setCurrTrack] = useState();
     const [isRepeatClicked, setRepeatClick] = useState(false);
+    const [isShuffleClicked, setShuffleClick] = useState(false);
     const [isPrevClicked, setPrevClicked] = useState(false);
     const [isNextClicked, setNextClicked] = useState(false);
     const [isPlaying, setPlayPauseClicked] = useState(true);
@@ -63,6 +64,9 @@ function Footer(props) {
             case "volume":
                 setVolumeClicked(val);
                 break;
+            case "shuffle":
+                setShuffleClick(val);
+                break;
             default:
                 break;
         }
@@ -112,29 +116,45 @@ function Footer(props) {
     })
     
      useEffect(()=>{
-        if (isNextClicked){
-            let currTrackId = props.music.index + 1;
-            if (currTrackId === props.playlist.length) {
-                currTrackId = 0;
+        if (isShuffleClicked) {
+            if (isNextClicked || isPrevClicked) {
+                let currTrackId = Math.floor(Math.random() * props.playlist.length) + 0;
+                axios.get(`http://localhost:9000/user/recent/songs/${props.playlist[currTrackId].name}&${user.username}`)
+                    .then(res => {
+                        dispatch(setCurrentPlaying(props.playlist[currTrackId]));
+                        if (isNextClicked) {
+                            setNextClicked(false);
+                        } else {
+                            setPrevClicked(false);
+                        }
+                    })
+                    .catch(err => {console.log(err)});
             }
-            axios.get(`http://localhost:9000/user/recent/songs/${props.playlist[currTrackId].name}&${user.username}`)
-                .then(res => {
-                    dispatch(setCurrentPlaying(props.playlist[currTrackId]));
-                    setNextClicked(false);
-                })
-                .catch(err => {console.log(err)});
-        }
-        if (isPrevClicked){
-            let currTrackId = props.music.index - 1;
-            if (currTrackId < 0){
-                currTrackId = props.playlist.length - 1;
+        } else {
+            if (isNextClicked){
+                let currTrackId = props.music.index + 1;
+                if (currTrackId === props.playlist.length) {
+                    currTrackId = 0;
+                }
+                axios.get(`http://localhost:9000/user/recent/songs/${props.playlist[currTrackId].name}&${user.username}`)
+                    .then(res => {
+                        dispatch(setCurrentPlaying(props.playlist[currTrackId]));
+                        setNextClicked(false);
+                    })
+                    .catch(err => {console.log(err)});
             }
-            axios.get(`http://localhost:9000/user/recent/songs/${props.playlist[currTrackId].name}&${user.username}`)
-                .then(res => {
-                    dispatch(setCurrentPlaying(props.playlist[currTrackId]));
-                    setPrevClicked(false);
-                })
-                .catch(err => {console.log(err)});
+            if (isPrevClicked){
+                let currTrackId = props.music.index - 1;
+                if (currTrackId < 0){
+                    currTrackId = props.playlist.length - 1;
+                }
+                axios.get(`http://localhost:9000/user/recent/songs/${props.playlist[currTrackId].name}&${user.username}`)
+                    .then(res => {
+                        dispatch(setCurrentPlaying(props.playlist[currTrackId]));
+                        setPrevClicked(false);
+                    })
+                    .catch(err => {console.log(err)});
+            }
         }
     },[dispatch, isNextClicked, isPrevClicked, props.playlist]);
 
@@ -183,7 +203,7 @@ function Footer(props) {
                 <div className="playback-controls">
                     <ControlsButton type={"repeat"} 
                                     defaultIcon={<i className='bx bx-repeat'></i>}
-                                    changeIcon={<i className='bx bx-repeat' style={{color: "blue"}}></i>}
+                                    changeIcon={<i className='bx bx-repeat' style={{color: "#e4335c"}}></i>}
                                     onClicked={handleToggle}/>
 
                     <ControlsButton type={"prev"} 
@@ -201,6 +221,11 @@ function Footer(props) {
                     <ControlsButton type={"next"} 
                                     defaultIcon={<i className='bx bx-skip-next' />}
                                     changeIcon={<i className='bx bx-skip-next'></i>}
+                                    onClicked={handleToggle} playlist={props.playlist}/>
+
+                    <ControlsButton type={"shuffle"}
+                                    defaultIcon={<i className='bx bx-shuffle'></i>}
+                                    changeIcon={<i className='bx bx-shuffle' style={{color: "#e4335c"}}></i>}
                                     onClicked={handleToggle} playlist={props.playlist}/>
                 </div>
 

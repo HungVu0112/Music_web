@@ -86,7 +86,7 @@ function PageContent({children}) {
             <div className="info-bar">
                 <div className="search-box" ref={searchBox}>
                     <i className='bx bx-search-alt'></i>
-                    <input type="text" placeholder="Search..." onChange={handleSearch}/>
+                    <input type="text" placeholder="What do you want to listen to?" onChange={handleSearch}/>
                 </div>
 
                 <div className="navigate" ref={navigate}>
