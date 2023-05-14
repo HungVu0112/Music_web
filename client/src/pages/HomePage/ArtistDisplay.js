@@ -5,6 +5,10 @@ import { setCurrentPlaying, setPlaylist } from "../../actions/actions";
 import axios from 'axios';
 
 function ArtistDisplay() {
+    const userJSON = sessionStorage.getItem("account");
+    const user = JSON.parse(userJSON);
+    const [newUser, setNewUser] = useState(user);
+    const [check, setCheck] = useState(0);
     const location = useLocation();
     const [songs, setSongs] = useState();
     const artist = location.state;
@@ -20,6 +24,29 @@ function ArtistDisplay() {
         dispatch(setPlaylist(songs));
     }
 
+    const handleAddFv = () => {
+        axios.get(`http://localhost:9000/user/favourite/artists/${artist.name}&${user.username}`)
+            .then(res => {
+                setCheck(n => n + 1)
+            })
+            .catch(err => {console.log(err);});
+    }
+
+    const handleDislike = () => {
+        axios.get(`http://localhost:9000/user/favourite/artists/delete/${artist.name}&${user.username}`)
+            .then(res => {
+                setCheck(n => n + 1)
+            })
+            .catch(err => {console.log(err);});
+    }
+
+    useEffect(() => {
+        axios.get(`http://localhost:9000/user/${user.username}`)
+            .then(res => {
+                setNewUser(res.data);
+            })
+    }, [check])
+
     useEffect(() => {
         axios.get(`http://localhost:9000/songs/${location.state.name}`, songs)
             .then(res => {
@@ -30,6 +57,8 @@ function ArtistDisplay() {
             })
             .catch(err => {console.log(err);})
     }, [location.state]);
+
+    console.log("checkrender")
 
     return (
         <div className="artistPage main-content" >
@@ -43,7 +72,18 @@ function ArtistDisplay() {
             <div className="body">
                 <div className="tool-bar">
                     <i className='bx bx-play play' onClick={handleClickPlay}></i>
-                    <i className='bx bxs-heart like'></i>
+                    
+                    {newUser.favourite.artists.filter(item => {
+                        if (item.name === artist.name) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }).length === 0 ? (
+                        <i className='bx bxs-heart like' onClick={handleAddFv}></i>
+                    ) : (
+                        <i className='bx bxs-heart like' onClick={handleDislike} style={{color: "red"}}></i>
+                    )}
                 </div>
 
                 <div className="list">

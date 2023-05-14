@@ -1,6 +1,7 @@
 const User = require('../model/User');
 const Playlist = require('../model/Playlist');
 const Song = require('../model/Song');
+const Artist = require('../model/Artist');
 
 class UserController {
     checkLogin(req, res, next) {
@@ -130,6 +131,114 @@ class UserController {
                 res.json("added");
             })
             .catch(next)
+    }
+
+    addFVSong(req, res, next) {
+        const songName = req.params.name.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: req.params.username }), Song.findOne({ name: songName })])
+            .then(([user, song]) => {
+                if (song) {
+                    user.favourite.songs.push(song);
+                    user.save();
+                    res.json("Added");
+                } else {
+                    res.json("Failed");
+                }
+            })
+            .catch(next);
+    }
+
+    addFVArtist(req, res, next) {
+        const artistName = req.params.name.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: req.params.username }), Artist.findOne({ name: artistName })])
+            .then(([user, artist]) => {
+                if (artist) {
+                    user.favourite.artists.push(artist);
+                    user.save();
+                    res.json("Added");
+                } else {
+                    res.json("Failed");
+                }
+            })
+            .catch(next);
+    }
+
+    addFVPlaylist(req, res, next) {
+        const playlistName = req.params.name.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: req.params.username }), Playlist.findOne({ name: playlistName })])
+            .then(([user, playlist]) => {
+                if (playlist) {
+                    user.favourite.playlists.push(playlist);
+                    user.save();
+                    res.json("Added");
+                } else {
+                    res.json("Failed");
+                }
+            })
+            .catch(next);
+    }
+
+    deleteFVSong(req, res, next) {
+        const songName = req.params.name.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: req.params.username }), Song.findOne({ name: songName })])
+            .then(([user, song]) => {
+                if (song) {
+                    user.favourite.songs = user.favourite.songs.filter(item => {
+                        if (item.name === song.name) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    });
+                    user.save();
+                    res.json("Deleted");
+                } else {
+                    res.json("Failed");
+                }
+            })
+            .catch(next);
+    }
+
+    deleteFVArtist(req, res, next) {
+        const artistName = req.params.name.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: req.params.username }), Artist.findOne({ name: artistName })])
+            .then(([user, artist]) => {
+                if (artist) {
+                    user.favourite.artists = user.favourite.artists.filter(item => {
+                        if (item.name === artist.name) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    });
+                    user.save();
+                    res.json("Deleted");
+                } else {
+                    res.json("Failed");
+                }
+            })
+            .catch(next);
+    }
+
+    deleteFVPlaylist(req, res, next) {
+        const playlistName = req.params.name.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: req.params.username }), Playlist.findOne({ name: playlistName })])
+            .then(([user, playlist]) => {
+                if (playlist) {
+                    user.favourite.playlists = user.favourite.playlists.filter(item => {
+                        if (item.name === playlist.name) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    });
+                    user.save();
+                    res.json("Deleted");
+                } else {
+                    res.json("Failed");
+                }
+            })
+            .catch(next);
     }
 }
 

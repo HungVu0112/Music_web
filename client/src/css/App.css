@@ -1125,9 +1125,20 @@ background-blend-mode: soft-light,screen;
 }
 
 .player .curr-song-container .curr-song-details {
-  font-size: 14px;
-  margin-left: 8px;
+  font-size: 10px;
+  margin-left: 16px;
 }
+
+.player .curr-song-container i {
+  margin-left: 32px;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.player .curr-song-container i:hover {
+  opacity: 0.7;
+}
+
 
 .player .playback-controls {
   display: flex;
@@ -1168,7 +1179,7 @@ background-blend-mode: soft-light,screen;
 }
 
 .content .player .playback-widgets .slider {
-  width: 50%;
+  width: 30%;
   margin-left: 8px;
 }
 

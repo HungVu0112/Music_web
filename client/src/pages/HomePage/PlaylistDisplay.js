@@ -1,9 +1,15 @@
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from "react-redux";
+import { useState, useEffect } from 'react';
 import { setCurrentPlaying, setPlaylist } from '../../actions/actions';
+import axios from 'axios';
 
 
 function PlaylistDisplay() {
+    const userJSON = sessionStorage.getItem("account");
+    const user = JSON.parse(userJSON);
+    const [newUser, setNewUser] = useState(user);
+    const [check, setCheck] = useState(0);
     const location = useLocation();
     const data = location.state;
     const dispatch = useDispatch();
@@ -23,6 +29,29 @@ function PlaylistDisplay() {
         dispatch(setPlaylist(playlist));
     }
 
+    const handleAddFv = () => {
+        axios.get(`http://localhost:9000/user/favourite/playlists/${user.username}&${data.name}`)
+            .then(res => {
+                setCheck(n => n + 1)
+            })
+            .catch(err => {console.log(err);});
+    }
+
+    const handleDislike = () => {
+        axios.get(`http://localhost:9000/user/favourite/playlists/delete/${user.username}&${data.name}`)
+            .then(res => {
+                setCheck(n => n + 1)
+            })
+            .catch(err => {console.log(err);});
+    }
+
+    useEffect(() => {
+        axios.get(`http://localhost:9000/user/${user.username}`)
+            .then(res => {
+                setNewUser(res.data);
+            })
+    }, [check])
+
     return (
         <div className="playlistPage main-content">
             <div className="heading">
@@ -35,7 +64,18 @@ function PlaylistDisplay() {
             <div className="body">
                 <div className="tool-bar">
                     <i className='bx bx-play play' onClick={handleClickPlay}></i>
-                    <i className='bx bxs-heart like'></i>
+                    
+                    {newUser.favourite.playlists.filter(playlist => {
+                        if (playlist.name === data.name) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }).length === 0 ? (
+                        <i className='bx bxs-heart like' onClick={handleAddFv}></i>
+                    ) : (
+                        <i className='bx bxs-heart like' onClick={handleDislike} style={{color: "red"}}></i>
+                    )}
                 </div>
 
                 <div className="list">

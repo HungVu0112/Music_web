@@ -1,10 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPlaying } from '../actions/actions';
+import axios from 'axios';
 import ControlsButton from './ControlsButton';
 import Slider from "@material-ui/core/Slider";
 
 function Footer(props) {
+    const userJSON = sessionStorage.getItem("account");
+    const user = JSON.parse(userJSON);
+    const [newUser, setNewUser] = useState(user);
     const [currTrack, setCurrTrack] = useState();
     const [isRepeatClicked, setRepeatClick] = useState(false);
     const [isPrevClicked, setPrevClicked] = useState(false);
@@ -19,6 +23,28 @@ function Footer(props) {
 
     const audioElement = useRef();
     const dispatch = useDispatch();
+
+    const handleAddFv = () => {
+        axios.get(`http://localhost:9000/user/favourite/songs/${props.music.name}&${user.username}`)
+            .then(res => {
+                axios.get(`http://localhost:9000/user/${user.username}`)
+                    .then(res => {
+                        setNewUser(res.data);
+                    })
+            })
+            .catch(err => {console.log(err);});
+    }
+
+    const handleDislike = () => {
+        axios.get(`http://localhost:9000/user/favourite/songs/delete/${props.music.name}&${user.username}`)
+            .then(res => {
+                axios.get(`http://localhost:9000/user/${user.username}`)
+                    .then(res => {
+                        setNewUser(res.data);
+                    })
+            })
+            .catch(err => {console.log(err);});
+    }
 
     const handleToggle = (type, val) => {
         switch (type) {
@@ -113,6 +139,16 @@ function Footer(props) {
         return s.substring(3);
     }
 
+    const test = newUser.favourite.songs.filter(song => {
+        if (song.name === props.music.name && song.artist_name === props.music.artist_name) {
+            return true;
+        } else {
+            return false;
+        }
+    })
+
+    console.log(test);
+
     return (
         <div className="player">
             <div className="playback">
@@ -131,6 +167,19 @@ function Footer(props) {
                         <h2>{props.music.name}</h2>
                         <p>{props.music.artist_name}</p>
                     </div>
+                    
+                    {newUser.favourite.songs.filter(song => {
+                        if (song.name === props.music.name && song.artist_name === props.music.artist_name) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }).length === 0 ? (
+                        <i className='bx bxs-heart' onClick={handleAddFv}></i>
+                    ) : (
+                        <i className='bx bxs-heart' onClick={handleDislike} style={{color: "red"}}></i>
+                    )}
+
                 </div>
 
                 <div className="playback-controls">
