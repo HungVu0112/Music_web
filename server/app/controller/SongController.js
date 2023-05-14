@@ -3,6 +3,23 @@ const Artist = require('../model/Artist');
 const CircularJSON = require('circular-json');
 
 class SongController{
+    getAll(req, res, next) {
+        Song.find()
+            .then(songs => {
+                res.json(songs);
+            })
+            .catch(next);
+    }
+
+    get4songs(req, res, next) {
+        const artistName = req.params.artistname.replace(/%20/g, " ");
+        Song.find({ artist_name: artistName }).limit(4)
+            .then(songs => { 
+                res.json(songs);
+            })
+            .catch(next);
+    }
+
     getSongsbyartistName(req, res, next) {
         const artistName = req.params.artistName.replace(/%20/g, " ");
         Song.find({ artist_name: artistName })
@@ -13,7 +30,7 @@ class SongController{
     }
 
     getTops(req, res, next) {
-        Promise.all([Song.find().sort({ like: -1 }), Song.aggregate([
+        Promise.all([Song.find().sort({ like: -1 }).limit(4), Song.aggregate([
             { $group: {
               _id: "$artist_name",
               totalLikes: { $sum: "$like" }

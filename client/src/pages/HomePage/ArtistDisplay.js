@@ -126,7 +126,7 @@ function ArtistDisplay() {
                                                         <p>{song.name}</p>
                                                     </div>
                                                 </td>
-                                                <td style={{ textAlign: "center" }}>2:30</td>
+                                                <td style={{ textAlign: "center" }}>{song.time}</td>
                                             </tr>
                                         )
                                     }

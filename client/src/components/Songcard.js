@@ -20,11 +20,13 @@ function Songcard(props) {
                     dispatch(setPlaylist(playlist));
                 } else {
                     const song = {...props.song, index: props.index}
-                    const playlist = props.playlist.map((song, index) => {
-                        return {...song, index: index};
-                    })
+                    if (props.playlist) { 
+                        const playlist = props.playlist.map((song, index) => {
+                            return {...song, index: index};
+                        })
+                        dispatch(setPlaylist(playlist));
+                    }
                     dispatch(setCurrentPlaying(song));
-                    dispatch(setPlaylist(playlist));
                 }
             })
             .catch(err => {console.log(err);}) 

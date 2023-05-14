@@ -116,44 +116,46 @@ function Footer(props) {
     })
     
      useEffect(()=>{
-        if (isShuffleClicked) {
-            if (isNextClicked || isPrevClicked) {
-                let currTrackId = Math.floor(Math.random() * props.playlist.length) + 0;
-                axios.get(`http://localhost:9000/user/recent/songs/${props.playlist[currTrackId].name}&${user.username}`)
-                    .then(res => {
-                        dispatch(setCurrentPlaying(props.playlist[currTrackId]));
-                        if (isNextClicked) {
+        if (props.playlist !== undefined) {
+            if (isShuffleClicked) {
+                if (isNextClicked || isPrevClicked) {
+                    let currTrackId = Math.floor(Math.random() * props.playlist.length) + 0;
+                    axios.get(`http://localhost:9000/user/recent/songs/${props.playlist[currTrackId].name}&${user.username}`)
+                        .then(res => {
+                            dispatch(setCurrentPlaying(props.playlist[currTrackId]));
+                            if (isNextClicked) {
+                                setNextClicked(false);
+                            } else {
+                                setPrevClicked(false);
+                            }
+                        })
+                        .catch(err => {console.log(err)});
+                }
+            } else {
+                if (isNextClicked){
+                    let currTrackId = props.music.index + 1;
+                    if (currTrackId === props.playlist.length) {
+                        currTrackId = 0;
+                    }
+                    axios.get(`http://localhost:9000/user/recent/songs/${props.playlist[currTrackId].name}&${user.username}`)
+                        .then(res => {
+                            dispatch(setCurrentPlaying(props.playlist[currTrackId]));
                             setNextClicked(false);
-                        } else {
+                        })
+                        .catch(err => {console.log(err)});
+                }
+                if (isPrevClicked){
+                    let currTrackId = props.music.index - 1;
+                    if (currTrackId < 0){
+                        currTrackId = props.playlist.length - 1;
+                    }
+                    axios.get(`http://localhost:9000/user/recent/songs/${props.playlist[currTrackId].name}&${user.username}`)
+                        .then(res => {
+                            dispatch(setCurrentPlaying(props.playlist[currTrackId]));
                             setPrevClicked(false);
-                        }
-                    })
-                    .catch(err => {console.log(err)});
-            }
-        } else {
-            if (isNextClicked){
-                let currTrackId = props.music.index + 1;
-                if (currTrackId === props.playlist.length) {
-                    currTrackId = 0;
+                        })
+                        .catch(err => {console.log(err)});
                 }
-                axios.get(`http://localhost:9000/user/recent/songs/${props.playlist[currTrackId].name}&${user.username}`)
-                    .then(res => {
-                        dispatch(setCurrentPlaying(props.playlist[currTrackId]));
-                        setNextClicked(false);
-                    })
-                    .catch(err => {console.log(err)});
-            }
-            if (isPrevClicked){
-                let currTrackId = props.music.index - 1;
-                if (currTrackId < 0){
-                    currTrackId = props.playlist.length - 1;
-                }
-                axios.get(`http://localhost:9000/user/recent/songs/${props.playlist[currTrackId].name}&${user.username}`)
-                    .then(res => {
-                        dispatch(setCurrentPlaying(props.playlist[currTrackId]));
-                        setPrevClicked(false);
-                    })
-                    .catch(err => {console.log(err)});
             }
         }
     },[dispatch, isNextClicked, isPrevClicked, props.playlist]);

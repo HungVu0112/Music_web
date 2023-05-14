@@ -151,7 +151,7 @@ html {
 /* Homepage */
 .homepage {
   position: relative;
-  height: 300vh;
+  height: 210vh;
   background: var(--body-color);
   transition: var(--tran-04);
 }
@@ -535,7 +535,6 @@ header .image-text .header-text {
   overflow: hidden;
 }
 
-.favourite .title,
 .searchPage .title,
 .playlists .title,
 .my-playlists .title,
@@ -1037,10 +1036,6 @@ h4 {
 }
 
 /* User Page */
-.userPage {
-  background-image: radial-gradient(73% 147%, #EADFDF 59%, #ECE2DF 100%), radial-gradient(91% 146%, rgba(255,255,255,0.50) 47%, rgba(0,0,0,0.50) 100%);
-  background-blend-mode: screen;
-}
 .userPage .heading .image {
   border: none;
   border-radius: 50%;
@@ -1048,10 +1043,12 @@ h4 {
 }
 
 /* Change Info Form */
+.displayPage .heading .image,
 .userPage .heading .image {
   position: relative;
 }
 
+.displayPage .heading .image i,
 .userPage .heading .image i {
   position: absolute;
   font-size: 56px;
@@ -1061,18 +1058,50 @@ h4 {
   display: none;
 }
 
+.displayPage .heading .image,
 .userPage .heading .image {
   cursor: pointer;
 }
 
+.displayPage .heading .image:hover img,
 .userPage .heading .image:hover img {
   opacity: 0.7;
 }
 
+.displayPage .heading .image:hover i,
 .userPage .heading .image:hover i {
   display: block;
 }
 
+.userPage .navigate,
+.userPage .body {
+  padding: 32px;
+}
+
+.userPage .body .body-info {
+  margin-left: 32px;
+  font-size: 12px;
+}
+
+.userPage .body button {
+  margin-top: 16px;
+  border: none;
+  width: 180px;
+  height: 40px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.userPage .navigate {
+  margin-top: -16px;;
+}
+
+.userPage .body button:hover {
+  opacity: 0.9;
+}
+
+/* Change Info Form */
+.content .change-password-form,
 .content .info-form {
   position: absolute;
   left: 13%;
@@ -1085,6 +1114,7 @@ h4 {
   display: none;
 }
 
+.content .change-password-form .close-btn,
 .content .info-form .close-btn {
   position: absolute;
   right: 16px;
@@ -1097,14 +1127,17 @@ h4 {
   cursor: pointer;
 }
 
+.content .change-password-form .close-btn:hover,
 .content .info-form .close-btn:hover {
   opacity: 0.6;
 }
 
+.content .change-password-form .close-btn i,
 .content .info-form .close-btn i {
   font-size: 30px;
 }
 
+.content .change-password-form .head,
 .content .info-form .head {
   margin-top: 8px;
   width: 100%;
@@ -1180,6 +1213,7 @@ h4 {
   margin-top: 8px;
 }
 
+.content .change-password-form .submit-btn,
 .content .info-form .submit-btn {
   width: 100%;
   display: flex;
@@ -1187,6 +1221,7 @@ h4 {
   margin-top: 8px;
 }
 
+.content .change-password-form .submit-btn button,
 .content .info-form .submit-btn button {
   border: none;
   width: 300px;
@@ -1198,9 +1233,59 @@ h4 {
   cursor: pointer;
 }
 
+.content .change-password-form .submit-btn button:hover,
 .content .info-form .submit-btn button:hover {
   opacity: 0.8;
 }
+
+/* Change password Form */
+.content .change-password-form .body {
+  position: relative;
+  width: 100%;
+  height: 250px;
+}
+
+.content .change-password-form .body .image {
+  position: absolute;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  color: rgba(112, 112, 112, 0.8);
+  font-size: 160px;
+  display: flex;
+  align-items: center;
+}
+
+.content .change-password-form .body .main {
+  position: absolute;
+  left: 40%;
+  width: 60%;
+  height: 100%;
+  margin-left: 60px;
+}
+
+.content .change-password-form .body .main label {
+  display: block;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.content .change-password-form .body .main input {
+  border: none;
+  width: 210px;
+  height: 40px;
+  outline: none;
+  padding: 8px;
+  border-radius: 5px;
+  background: rgba(0,0,0,.1);
+  color: white;
+}
+
+.content .change-password-form .body .main p {
+  font-size: 10px;
+  margin-top: 4px;
+}
+
 /* Search Page */
 .searchPage .page-body {
   padding: 16px;
@@ -1372,4 +1457,49 @@ span.MuiSlider-track {
 
 .searchPage .page-body .artist-element .card .card-body {
   text-align: center;
+}
+
+.content .home .card .card-body {
+  font-size: 12px; 
+}
+
+.content .home .card img {
+  height: 70%;
+}
+
+/* Recent */
+.content .favourite,
+.content .recent {
+  padding: 16px;
+}
+
+.content .favourite .display,
+.content .recent .display {
+  width: 100%;
+  height: 380px;
+  margin-top: 32px;
+  overflow: auto;
+}
+
+.content .favourite .display .card,
+.content .recent .display .card {
+  width: 22%;
+  height: 300px;
+  float: left;
+}
+
+.content .favourite .display .card img,
+.content .recent .display .card img {
+  width: 100%;
+  height: 70%;
+}
+
+.content .favourite .display .card .card-body,
+.content .recent .display .card .card-body {
+  font-size: 12px;
+}
+
+.content .favourite .artist .card img,
+.content .recent .artist .card img {
+  border-radius: 50%;
 }

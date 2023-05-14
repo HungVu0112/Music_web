@@ -7,9 +7,15 @@ import axios from 'axios';
 function SongsDisplay() {
     const [data, setData] = useState({});
     const [songs, setSongs] = useState([]);
-    let check = 0;
+    const [reRender, setRerender] = useState(0);
+    const [info, setInfo] = useState({
+        name: '',
+        image: '',
+    });
     const searchResult = useRef();
     const searchInput = useRef();
+    const form = useRef();
+    const close = useRef();
     const location = useLocation();
     const redirect = useNavigate();
     const dispatch = useDispatch();
@@ -79,6 +85,27 @@ function SongsDisplay() {
             .catch(err => {console.log(err)});
     }
 
+    const handleOpen = () => {
+        form.current.style.display = "block";
+    }
+
+    const handleClose = () => {
+        form.current.style.display = "none";
+    }
+
+    const handleInput2 = (e) => {
+        setInfo(prev => ({...prev, [e.target.name] : e.target.value}));
+    }
+
+    const handleSubmit = () => {
+        const UrlString = encodeURIComponent(info.image);
+        axios.get(`http://localhost:9000/user/playlist/change/${user.username}&${data.name}&${info.name}&${UrlString}`)
+            .then(res => {
+                form.current.style.display = "none";
+                setRerender(n => n + 1);
+            })
+    }
+
     useEffect(() => {
         if (location.pathname === "/library/myPlaylist/create") {
             axios.get(`http://localhost:9000/user/playlist/create/${user.username}`, data)
@@ -95,11 +122,22 @@ function SongsDisplay() {
         }
     }, [location.pathname, location.state, songs]);
 
+    useEffect(() => {
+        axios.get(`http://localhost:9000/user/playlist/${location.state.name}&${user.username}`, data)
+                .then(res => {
+                    console.log("render!")
+                    setData(res.data);
+                })
+                .catch(err => { console.log(err); })
+    },[reRender])
+
     return (
+        <>
        <div className="displayPage main-content">
             <div className="heading">
-                <div className="image">
+                <div className="image" onClick={handleOpen}>
                     <img src={data ? data.image : ""} alt="img" />
+                    <i class='bx bx-edit'></i>
                 </div>
                 <h1>{data ? data.name : "name"}</h1>
             </div>
@@ -183,7 +221,7 @@ function SongsDisplay() {
                                                     </div>
                                                 </td>
                                                 <td>{song.artist_name}</td>
-                                                <td style={{ textAlign: "center" }}>2:30</td>
+                                                <td style={{ textAlign: "center" }}>{song.time}</td>
                                             </tr>
                                         )
                                     }
@@ -193,7 +231,39 @@ function SongsDisplay() {
                     </table>
                 </div>
             </div>
-       </div> 
+       </div>
+
+       <div className="info-form" ref={form}>
+                <div className="close-btn" ref={close} onClick={handleClose}>
+                    <i className='bx bxs-tag-x'></i>
+                </div>
+
+                <div className="head">
+                    <h1>CHANGE INFO</h1>
+                </div>
+                <div className="body">
+                    <div className="avatar">
+                        <div className="image">
+                            <img src={data ? data.image : ""} alt="img"/>
+                        </div>
+                        <input type="text" value={info.image} name="image" placeholder="Type your image link..." onChange={handleInput2} autoComplete="off"/>
+                    </div>
+
+                    <div className="username">
+                        <div className="header">
+                            <label htmlFor="name">Name</label>
+                            <i className='bx bx-edit-alt'></i>
+                        </div>
+
+                        <input type="text" id="name" value={info.name} name="name" placeholder="Type your username..." onChange={handleInput2} autoComplete="off"/>
+                    </div>
+                </div>
+                
+                <div className="submit-btn">
+                    <button onClick={handleSubmit}>Save</button>
+                </div>
+            </div>
+            </> 
     )
 }
 
