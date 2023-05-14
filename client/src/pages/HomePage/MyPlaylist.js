@@ -48,7 +48,6 @@ function MyPlaylist() {
                                     <p>Songs: {playlist.songs ? playlist.songs.length : 0}</p>
                                     
                                     <div className="option">
-                                        <button>Edit</button>
                                         <button value={index} onClick={handleDelete}>Delete</button>
                                     </div>
                                 </div>

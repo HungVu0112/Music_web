@@ -18,15 +18,23 @@ function PlaylistDisplay() {
     })
 
     const handlePlay = (index) => {
-        const song = {...data.songs[index], index: index};
-        dispatch(setCurrentPlaying(song));
-        dispatch(setPlaylist(playlist));
+        axios.get(`http://localhost:9000/user/recent/songs/${data.songs[index].name}&${user.username}`)
+            .then(res => {
+                const song = {...data.songs[index], index: index};
+                dispatch(setCurrentPlaying(song));
+                dispatch(setPlaylist(playlist));
+            })
+            .catch(err => {console.log(err)});
     }
 
     const handleClickPlay = () => {
-        const song = {...data.songs[0], index: 0};
-        dispatch(setCurrentPlaying(song));
-        dispatch(setPlaylist(playlist));
+        axios.get(`http://localhost:9000/user/recent/songs/${data.songs[0].name}&${user.username}`)
+            .then(res => {
+                const song = {...data.songs[0], index: 0};
+                dispatch(setCurrentPlaying(song));
+                dispatch(setPlaylist(playlist));
+            })
+            .catch(err => {console.log(err)});
     }
 
     const handleAddFv = () => {

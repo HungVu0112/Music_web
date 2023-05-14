@@ -32,7 +32,16 @@ class UserController {
           .then(user => {
                 if (!user) {
                     req.body.avatar = 'https://i0.wp.com/310ai.com/wp-content/uploads/2022/10/face.jpg?fit=1024%2C1024&ssl=1';
-                    req.body.recent_play = [];
+                    req.body.recent = {
+                        songs: [],
+                        artists: [],
+                        playlists: [],
+                    };
+                    req.body.favourite = {
+                        songs: [],
+                        artists: [],
+                        playlists: [],
+                    };
                     const new_user = new User(req.body);
                     new_user.save();
                     res.json('OK');
@@ -244,6 +253,70 @@ class UserController {
                     });
                     user.save();
                     res.json("Deleted");
+                } else {
+                    res.json("Failed");
+                }
+            })
+            .catch(next);
+    }
+
+    recentSongs(req, res, next) {
+        const songName = req.params.name.replace(/%20/g, " ");
+       
+        Promise.all([User.findOne({ username: req.params.username }), Song.findOne({ name: songName })])
+            .then(([user, song]) => {
+                if (song) {
+                    user.recent.songs.forEach((item, index) => {
+                        if (item.name === song.name) {
+                            user.recent.songs.splice(index, 1);
+                        }
+                    })
+
+                    user.recent.songs.push(song);
+                    user.save();
+                    res.json("Added");
+                } else {
+                    res.json("Failed");
+                }
+            })
+            .catch(next);
+    }
+
+    recentArtists(req, res, next) {
+        const artistName = req.params.name.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: req.params.username }), Artist.findOne({ name: artistName })])
+            .then(([user, artist]) => {
+                if (artist) {
+                    user.recent.artists.forEach((item, index) => {
+                        if (item.name === artist.name) {
+                            user.recent.artists.splice(index, 1);
+                        }
+                    })
+                    
+                    user.recent.artists.push(artist);
+                    user.save();
+                    res.json("Added");
+                } else {
+                    res.json("Failed");
+                }
+            })
+            .catch(next);
+    }
+
+    recentPlaylists(req, res, next) {
+        const playlistName = req.params.name.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: req.params.username }), Playlist.findOne({ name: playlistName })])
+            .then(([user, playlist]) => {
+                if (playlist) {
+                    user.recent.playlists.forEach((item, index) => {
+                        if (item.name === playlist.name) {
+                            user.recent.playlists.splice(index, 1);
+                        }
+                    })
+                    
+                    user.recent.playlists.push(playlist);
+                    user.save();
+                    res.json("Added");
                 } else {
                     res.json("Failed");
                 }
