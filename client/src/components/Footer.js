@@ -97,7 +97,7 @@ function Footer(props) {
             if (audioElement.current !== null)
                 setCurrTime(audioElement.current.currentTime);
         })
-    });
+    },);
     
     useEffect(() => {
         setCurrTrack(props.music);
