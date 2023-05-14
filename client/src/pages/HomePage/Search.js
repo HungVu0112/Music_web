@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import ItemsBox from '../../components/ItemsBox';
 import Card from '../../components/card';
 import Songcard from '../../components/Songcard';
 import axios from 'axios';

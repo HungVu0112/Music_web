@@ -157,12 +157,12 @@ html {
 }
 
 .homepage.dark {
-  --body-color: #18191A;
+  --body-color: #121212;
   --sidebar-color: #242526;
   --primary-color: #3A3B3C;
   --primary-color-light: #3A3B3C;
   --toggle-color: #FFF;
-  --text--color: #CCC;
+  --text--color: #FFF;
   --child-body-text-color: #707070;
   --infor-bar-color: #3a3b3c;
 }
@@ -503,7 +503,7 @@ header .image-text .header-text {
 
 /* Card */
 .card {
-  background-color: var(--text--color);
+  background-color: #181818;
   border-radius: 6px;
   padding: 8px;
   margin: 8px 8px;
@@ -527,7 +527,7 @@ header .image-text .header-text {
 
 .card .card-body {
   margin: 8px 0;
-  color: var(--chid-body-text-color);
+  color: var(--text--color);
 }
 
 /* Artitst */
@@ -546,7 +546,7 @@ header .image-text .header-text {
   margin-left: 8px;
   height: 120px;
   padding: 32px;
-  border-bottom: 2px solid var(--text--color);
+  /* border-bottom: 2px solid #e4335c; */
   font-size: 24px;
 }
 
@@ -720,7 +720,7 @@ header .image-text .header-text {
   width: 60px;
   height: 60px;
   font-size: 32px;
-  background-color: #0ae157;
+  background-color: white;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -890,6 +890,7 @@ header .image-text .header-text {
 /* Library */
 .content .navigate {
   display: flex;
+  
 }
 
 .content .navigate a {
@@ -1117,8 +1118,8 @@ background-blend-mode: soft-light,screen;
 
 .player .curr-song-container .image {
   border-radius: 50%;
-  width: 55px;
-  height: 55px;
+  width: 40px;
+  height: 40px;
   overflow: hidden;
   animation: rotating 3s linear infinite;
 }
@@ -1186,4 +1187,18 @@ background-blend-mode: soft-light,screen;
   width: 30%;
   margin-left: 8px;
 }
+.artist .card img {
+  border-radius: 50%;
+}
 
+.artist .card .card-body {
+  text-align: center;
+}
+
+span.MuiSlider-thumb {
+  display: none;
+}
+
+span.MuiSlider-track {
+  color: #e4335c;
+}
