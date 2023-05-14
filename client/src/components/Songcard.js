@@ -1,25 +1,33 @@
 import { useDispatch } from "react-redux";
 import { setCurrentPlaying, setPlaylist } from '../actions/actions';
+import axios from 'axios';
 
 function Songcard(props) {
+    const userJSON = sessionStorage.getItem("account");
+    const user = JSON.parse(userJSON);
     const dispatch = useDispatch();
+    
     const handlePlay = () => {
-        if (props.artistAmount !== undefined) {
-            const index = props.index - props.artistAmount;
-            const song = {...props.song, index: index};
-            const playlist = props.playlist.slice(props.artistAmount).map((song, index) => {
-                return {...song, index: index};
+        axios.get(`http://localhost:9000/user/recent/songs/${props.song.name}&${user.username}`)
+            .then(res => {
+                if (props.artistAmount !== undefined) {
+                    const index = props.index - props.artistAmount;
+                    const song = {...props.song, index: index};
+                    const playlist = props.playlist.slice(props.artistAmount).map((song, index) => {
+                        return {...song, index: index};
+                    })
+                    dispatch(setCurrentPlaying(song));
+                    dispatch(setPlaylist(playlist));
+                } else {
+                    const song = {...props.song, index: props.index}
+                    const playlist = props.playlist.map((song, index) => {
+                        return {...song, index: index};
+                    })
+                    dispatch(setCurrentPlaying(song));
+                    dispatch(setPlaylist(playlist));
+                }
             })
-            dispatch(setCurrentPlaying(song));
-            dispatch(setPlaylist(playlist));
-        } else {
-            const song = {...props.song, index: props.index}
-            const playlist = props.playlist.map((song, index) => {
-                return {...song, index: index};
-            })
-            dispatch(setCurrentPlaying(song));
-            dispatch(setPlaylist(playlist));
-        }
+            .catch(err => {console.log(err);}) 
     }
 
     return (

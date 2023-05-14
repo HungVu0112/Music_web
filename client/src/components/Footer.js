@@ -117,16 +117,24 @@ function Footer(props) {
             if (currTrackId === props.playlist.length) {
                 currTrackId = 0;
             }
-            dispatch(setCurrentPlaying(props.playlist[currTrackId]));
-            setNextClicked(false);
+            axios.get(`http://localhost:9000/user/recent/songs/${props.playlist[currTrackId].name}&${user.username}`)
+                .then(res => {
+                    dispatch(setCurrentPlaying(props.playlist[currTrackId]));
+                    setNextClicked(false);
+                })
+                .catch(err => {console.log(err)});
         }
         if (isPrevClicked){
             let currTrackId = props.music.index - 1;
             if (currTrackId < 0){
                 currTrackId = props.playlist.length - 1;
             }
-            dispatch(setCurrentPlaying(props.playlist[currTrackId]));
-            setPrevClicked(false);
+            axios.get(`http://localhost:9000/user/recent/songs/${props.playlist[currTrackId].name}&${user.username}`)
+                .then(res => {
+                    dispatch(setCurrentPlaying(props.playlist[currTrackId]));
+                    setPrevClicked(false);
+                })
+                .catch(err => {console.log(err)});
         }
     },[dispatch, isNextClicked, isPrevClicked, props.playlist]);
 
@@ -138,16 +146,6 @@ function Footer(props) {
             s = Math.floor((t - Date.parse("1/1/70")) / 3600000) + s.slice(2);
         return s.substring(3);
     }
-
-    const test = newUser.favourite.songs.filter(song => {
-        if (song.name === props.music.name && song.artist_name === props.music.artist_name) {
-            return true;
-        } else {
-            return false;
-        }
-    })
-
-    console.log(test);
 
     return (
         <div className="player">

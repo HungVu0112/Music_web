@@ -15,13 +15,21 @@ function ArtistDisplay() {
     const dispatch = useDispatch();
 
     const handlePlay = (index) => {
-        dispatch(setCurrentPlaying(songs[index]));
-        dispatch(setPlaylist(songs));
+        axios.get(`http://localhost:9000/user/recent/songs/${songs[index].name}&${user.username}`)
+            .then(res => {
+                dispatch(setCurrentPlaying(songs[index]));
+                dispatch(setPlaylist(songs));
+            })
+            .catch(err => {console.log(err)});
     }
 
     const handleClickPlay = () => {
-        dispatch(setCurrentPlaying(songs[0]));
-        dispatch(setPlaylist(songs));
+        axios.get(`http://localhost:9000/user/recent/songs/${songs[0].name}&${user.username}`)
+            .then(res => {
+                dispatch(setCurrentPlaying(songs[0]));
+                dispatch(setPlaylist(songs));
+            })
+            .catch(err => {console.log(err)});
     }
 
     const handleAddFv = () => {

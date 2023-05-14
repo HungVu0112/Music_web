@@ -17,23 +17,31 @@ function SongsDisplay() {
     const user = JSON.parse(userJSON);
 
     const handlePlay = (index) => {
-        const song = {...data.songs[index], index: index};
-        const playlist = data.songs.map((song, index) => {
-            return {...song, index: index};
-        })
+        axios.get(`http://localhost:9000/user/recent/songs/${data.songs[index].name}&${user.username}`)
+            .then(res => {
+                const song = {...data.songs[index], index: index};
+                const playlist = data.songs.map((song, index) => {
+                    return {...song, index: index};
+                })
 
-        dispatch(setCurrentPlaying(song));
-        dispatch(setPlaylist(playlist));
+                dispatch(setCurrentPlaying(song));
+                dispatch(setPlaylist(playlist));
+            })
+            .catch(err => {console.log(err)});
     }
 
     const handleClickPlay = () => {
-        const song = {...data.songs[0], index: 0};
-        const playlist = data.songs.map((song, index) => {
-            return {...song, index: index};
-        })
-        
-        dispatch(setCurrentPlaying(song));
-        dispatch(setPlaylist(playlist));
+        axios.get(`http://localhost:9000/user/recent/songs/${data.songs[0].name}&${user.username}`)
+            .then(res => {
+                const song = {...data.songs[0], index: 0};
+                const playlist = data.songs.map((song, index) => {
+                    return {...song, index: index};
+                })
+                
+                dispatch(setCurrentPlaying(song));
+                dispatch(setPlaylist(playlist));
+            })
+            .catch(err => {console.log(err)});
     }
 
     function onBlurHandler() {
@@ -54,9 +62,6 @@ function SongsDisplay() {
                 .catch(err => {console.log(err)})
 
             searchResult.current.style.display = "block";
-
-            // e.target.addEventListener("blur", onBlurHandler)
-            // e.target.addEventListener("focus", onFocusHandler)
         } else {
             searchResult.current.style.display = "none";
         }
