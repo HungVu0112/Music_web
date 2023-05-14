@@ -1058,14 +1058,16 @@ h4 {
   justify-content: center;
 }
 .modal .modal-container {
-  background: #fff;
-  width: 800px;
+  background: #282828;
+  width: 600px;
   min-height: 200px;
   position: relative;
+  overflow: hidden;
+  border-radius: 10px;  
 }
 .modal .modal-container .modal-header {
-  background: #009688;
-  height: 130px;
+  background: #282828;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1076,7 +1078,7 @@ h4 {
   position: absolute;
   right: 0;
   top: 0;
-  color: #fff;
+  color: #282828;
   padding: 10px;
   cursor: pointer;
   opacity: 0.8;
@@ -1085,12 +1087,13 @@ h4 {
   opacity: 1;
 }
 .modal-body {
-  padding: 16px;
+  border :16px solid #282828;
 }
 .modal-label {
   display: block;
   font-size: 15px;
   margin-bottom: 12px;
+  color: white;
 }
 .modal-input {
   border: 1px solid #ccc;
@@ -1098,11 +1101,12 @@ h4 {
   padding: 10px;
   font-size: 15px;
   margin-bottom: 25px;
+  background-color: #3e3e3e;
 }
 #change {
-  background: #009688;
+  background: white;
   border: none;
-  color: #fff;
+  color: #000000;
   width: 100%;
   font-size: 15px;
   text-transform: uppercase;
@@ -1151,7 +1155,7 @@ h4 {
 }
 
 .userPage .heading {
-background-color: #DCD9D4;
+background-color: #464646;
 background-image: linear-gradient(to bottom, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%), radial-gradient(at 50% 0%, rgba(255,255,255,0.10) 0%, rgba(0,0,0,0.50) 50%);
 background-blend-mode: soft-light,screen;
 }
