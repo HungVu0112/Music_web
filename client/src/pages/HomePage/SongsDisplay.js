@@ -5,13 +5,8 @@ import { setCurrentPlaying, setPlaylist } from "../../actions/actions";
 import axios from 'axios';
 
 function SongsDisplay() {
-    const [data, setData] = useState({});
     const [songs, setSongs] = useState([]);
     const [reRender, setRerender] = useState(0);
-    const [info, setInfo] = useState({
-        name: '',
-        image: '',
-    });
     const searchResult = useRef();
     const searchInput = useRef();
     const form = useRef();
@@ -21,6 +16,11 @@ function SongsDisplay() {
     const dispatch = useDispatch();
     const userJSON = sessionStorage.getItem("account");
     const user = JSON.parse(userJSON);
+    const [data, setData] = useState({});
+    const [info, setInfo] = useState({
+        name: '',
+        image: '',
+    });
 
     const handlePlay = (index) => {
         axios.get(`http://localhost:9000/user/recent/songs/${data.songs[index].name}&${user.username}`)
@@ -123,9 +123,8 @@ function SongsDisplay() {
     }, [location.pathname, location.state, songs]);
 
     useEffect(() => {
-        axios.get(`http://localhost:9000/user/playlist/${location.state.name}&${user.username}`, data)
+        axios.get(`http://localhost:9000/user/playlist/${info.name}&${user.username}`, data)
                 .then(res => {
-                    console.log("render!")
                     setData(res.data);
                 })
                 .catch(err => { console.log(err); })
@@ -244,7 +243,7 @@ function SongsDisplay() {
                 <div className="body">
                     <div className="avatar">
                         <div className="image">
-                            <img src={data ? data.image : ""} alt="img"/>
+                            <img src={data.image} alt="img"/>
                         </div>
                         <input type="text" value={info.image} name="image" placeholder="Type your image link..." onChange={handleInput2} autoComplete="off"/>
                     </div>
