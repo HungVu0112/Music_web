@@ -49,8 +49,6 @@ function Search({ searchData }) {
             
                 <div className="page-body">
                     <div className="search-element">
-                        
-    
                         {searchData.length === 0 ? (data.current.length === 0 ? "" : 
                         <>    
                             <h2 className="text">・Top 4 Songs</h2>

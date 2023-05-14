@@ -5,9 +5,11 @@ const userController = require('../app/controller/UserController');
 
 router.post('/checkLogin', userController.checkLogin);
 router.post('/checkSignup', userController.checkSignup);
+router.get('/user/recent/get/:username', userController.getRecent);
 router.get('/user/recent/songs/:name&:username', userController.recentSongs);
 router.get('/user/recent/artists/:name&:username', userController.recentArtists);
 router.get('/user/recent/playlists/:username&:name', userController.recentPlaylists);
+router.get('/user/favourite/get/:username', userController.getFavourite);
 router.get('/user/favourite/songs/delete/:name&:username', userController.deleteFVSong);
 router.get('/user/favourite/artists/delete/:name&:username', userController.deleteFVArtist);
 router.get('/user/favourite/playlists/delete/:username&:name', userController.deleteFVPlaylist);

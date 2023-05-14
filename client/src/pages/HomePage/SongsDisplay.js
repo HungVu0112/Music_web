@@ -221,7 +221,7 @@ function SongsDisplay() {
                                                     </div>
                                                 </td>
                                                 <td>{song.artist_name}</td>
-                                                <td style={{ textAlign: "center" }}>2:30</td>
+                                                <td style={{ textAlign: "center" }}>{song.time}</td>
                                             </tr>
                                         )
                                     }

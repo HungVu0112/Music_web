@@ -40,6 +40,22 @@ class UserController {
             .catch(next);
     }
 
+    getRecent(req, res, next) {
+        User.findOne({ username: req.params.username })
+            .then(user => {
+                res.json(user.recent);
+            })
+            .catch(next);
+    }
+
+    getFavourite(req, res, next) {
+        User.findOne({ username: req.params.username })
+            .then(user => {
+                res.json(user.favourite);
+            })
+            .catch(next);
+    }
+
     checkLogin(req, res, next) {
         User.findOne(req.body)
             .then(user => {

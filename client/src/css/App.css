@@ -151,7 +151,7 @@ html {
 /* Homepage */
 .homepage {
   position: relative;
-  height: 300vh;
+  height: 210vh;
   background: var(--body-color);
   transition: var(--tran-04);
 }
@@ -535,7 +535,6 @@ header .image-text .header-text {
   overflow: hidden;
 }
 
-.favourite .title,
 .searchPage .title,
 .playlists .title,
 .my-playlists .title,
@@ -1457,4 +1456,49 @@ span.MuiSlider-track {
 
 .searchPage .page-body .artist-element .card .card-body {
   text-align: center;
+}
+
+.content .home .card .card-body {
+  font-size: 12px; 
+}
+
+.content .home .card img {
+  height: 70%;
+}
+
+/* Recent */
+.content .favourite,
+.content .recent {
+  padding: 16px;
+}
+
+.content .favourite .display,
+.content .recent .display {
+  width: 100%;
+  height: 380px;
+  margin-top: 32px;
+  overflow: auto;
+}
+
+.content .favourite .display .card,
+.content .recent .display .card {
+  width: 22%;
+  height: 300px;
+  float: left;
+}
+
+.content .favourite .display .card img,
+.content .recent .display .card img {
+  width: 100%;
+  height: 70%;
+}
+
+.content .favourite .display .card .card-body,
+.content .recent .display .card .card-body {
+  font-size: 12px;
+}
+
+.content .favourite .artist .card img,
+.content .recent .artist .card img {
+  border-radius: 50%;
 }
