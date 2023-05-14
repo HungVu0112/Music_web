@@ -21,6 +21,7 @@ function Playlists() {
             </div>
 
             <div className="body">
+                
                 { data.map((playlist, index) => {
                     return <Card img={playlist.image} name={playlist.name} key={index} path="playlist" state={playlist}/>
                 })}

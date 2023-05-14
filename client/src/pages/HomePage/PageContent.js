@@ -82,6 +82,7 @@ function PageContent({children}) {
             <Header homePage={homePage} sidebar={sidebar} />
         </div>
         <div className='content'>
+            
             <div className="info-bar">
                 <div className="search-box" ref={searchBox}>
                     <i className='bx bx-search-alt'></i>
