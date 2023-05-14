@@ -21,7 +21,7 @@ function AboutUs() {
             <div className="body">
                 { data.map((aboutus, index) => {
                     return <Card img={aboutus.image} name={aboutus.name}
-                                  desc ={aboutus.desc}/>
+                                  desc ={aboutus.desc} key={index}/>
                 })}
             </div>
         </div>

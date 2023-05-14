@@ -20,7 +20,6 @@ function Artists() {
             <div className="title">
                 <h1 className="text">Artists</h1>
             </div>
-
             <div className="body">
                 { data.map((artist, index) => {
                     return <Link to={`/artists/${artist.name}`} state={artist} key={index}><Card img={artist.image} name={artist.name} key={index} /></Link>

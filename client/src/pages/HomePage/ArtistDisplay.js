@@ -1,16 +1,32 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCurrentPlaying, setPlaylist } from "../../actions/actions";
 import axios from 'axios';
 
 function ArtistDisplay() {
     const location = useLocation();
     const [songs, setSongs] = useState();
     const artist = location.state;
+    const dispatch = useDispatch();
+
+    const handlePlay = (index) => {
+        dispatch(setCurrentPlaying(songs[index]));
+        dispatch(setPlaylist(songs));
+    }
+
+    const handleClickPlay = () => {
+        dispatch(setCurrentPlaying(songs[0]));
+        dispatch(setPlaylist(songs));
+    }
 
     useEffect(() => {
         axios.get(`http://localhost:9000/songs/${location.state.name}`, songs)
             .then(res => {
-                setSongs(res.data);
+                const playlist = res.data.map((song, index) => {
+                    return {...song, index: index}
+                })
+                setSongs(playlist);
             })
             .catch(err => {console.log(err);})
     }, [location.state]);
@@ -23,10 +39,10 @@ function ArtistDisplay() {
                 </div>
                 <h1>{artist.name}</h1>
             </div>
-
+            
             <div className="body">
                 <div className="tool-bar">
-                    <i className='bx bx-play play' ></i>
+                    <i className='bx bx-play play' onClick={handleClickPlay}></i>
                     <i className='bx bxs-heart like'></i>
                 </div>
 
@@ -51,7 +67,7 @@ function ArtistDisplay() {
                             {songs === undefined ? <tr></tr> : (
                                     songs.map((song, index) => {
                                         return (
-                                            <tr key={index}>
+                                            <tr key={index} onClick={() => handlePlay(index)}>
                                                 <th scope="row">{index + 1}</th>
                                                 <td>
                                                     <div className="song-info">
