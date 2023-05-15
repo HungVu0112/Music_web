@@ -5,7 +5,8 @@ const Artist = require('../model/Artist');
 
 class UserController {
     changeInfo(req, res, next) {
-        User.findOne({ username: req.params.username })
+        const username = req.params.username.replace(/%20/g, " ");
+        User.findOne({ username: username })
             .then(user => {
                 user.username = req.params.newusername;
                 user.avatar = req.params.newavatar;
@@ -16,11 +17,14 @@ class UserController {
     }
 
     changeInfoPlaylist(req, res, next) {
-        User.findOne({ username: req.params.username })
+        const username = req.params.username.replace(/%20/g, " ");
+        const playlistName = req.params.name.replace(/%20/g, " ");
+        const newName = req.params.newname.replace(/%20/g, " ");
+        User.findOne({ username: username })
             .then(user => {
                 user.playlists.forEach(playlist => {
-                    if (playlist.name === req.params.name) {
-                        playlist.name = req.params.newname;
+                    if (playlist.name === playlistName) {
+                        playlist.name = newName;
                         playlist.image = req.params.link;
                     }
                 })
@@ -31,7 +35,8 @@ class UserController {
     }
 
     changePw(req, res, next) {
-        User.findOne({ username: req.params.username })
+        const username = req.params.username.replace(/%20/g, " ");
+        User.findOne({ username: username })
             .then(user => {
                 user.password = req.params.newpassword;
                 user.save();
@@ -41,7 +46,8 @@ class UserController {
     }
 
     getRecent(req, res, next) {
-        User.findOne({ username: req.params.username })
+        const username = req.params.username.replace(/%20/g, " ");
+        User.findOne({ username: username })
             .then(user => {
                 res.json(user.recent);
             })
@@ -49,7 +55,8 @@ class UserController {
     }
 
     getFavourite(req, res, next) {
-        User.findOne({ username: req.params.username })
+        const username = req.params.username.replace(/%20/g, " ");
+        User.findOne({ username: username })
             .then(user => {
                 res.json(user.favourite);
             })
@@ -96,7 +103,8 @@ class UserController {
     }
 
     getUser(req, res, next) {
-        User.findOne({ username: req.params.username })    
+        const username = req.params.username.replace(/%20/g, " ");
+        User.findOne({ username: username })    
             .then(user => {
                 res.json(user);
             })
@@ -105,7 +113,8 @@ class UserController {
 
     getPlaylist(req, res, next) {
         const playlistName = req.params.name.replace(/%20/g, " ");
-        User.findOne({ username: req.params.username })
+        const username = req.params.username.replace(/%20/g, " ");
+        User.findOne({ username: username })
             .then(user => {
                 user.playlists.map(playlist => {
                     if (playlist.name === playlistName) {
@@ -117,7 +126,8 @@ class UserController {
     }
 
     createPlaylist(req, res, next) {
-        User.findOne({ username: req.params.name })
+        const username = req.params.name.replace(/%20/g, " ");
+        User.findOne({ username: username })
             .then(user => {
                 var count = user.playlists.length + 1;
                 
@@ -140,7 +150,8 @@ class UserController {
     }
 
     deletePlaylist(req, res, next) {
-        User.findOne({ username: req.params.username })
+        const username = req.params.username.replace(/%20/g, " ");
+        User.findOne({ username: username })
             .then(user =>{
                 user.playlists.splice(req.params.id, 1);
                 user.save();
@@ -152,7 +163,8 @@ class UserController {
     searchSong(req, res, next) {
         const songName = req.params.name.replace(/%20/g, " ");
         const playlistName = req.params.playlistName.replace(/%20/g, " ");
-        Promise.all([User.findOne({ username: req.params.username }), Song.find({ name: { $regex : new RegExp(`${songName}`, 'i') } }).lean()])
+        const username = req.params.username.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: username }), Song.find({ name: { $regex : new RegExp(`${songName}`, 'i') } }).lean()])
             .then(([user, songs]) => {
                 if (songs) {
                     const newSongs = songs.map((song) => {
@@ -180,7 +192,8 @@ class UserController {
     addSong(req, res, next) {
         const songName = req.params.name.replace(/%20/g, " ");
         const playlistName = req.params.playlistName.replace(/%20/g, " ");
-        Promise.all([User.findOne({ username: req.params.username }), Song.findOne({ name: songName })])
+        const username = req.params.username.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: username }), Song.findOne({ name: songName })])
             .then(([user, song]) => {
                 user.playlists.map((playlist) => {
                     if (playlist.name === playlistName) {
@@ -196,7 +209,8 @@ class UserController {
 
     addFVSong(req, res, next) {
         const songName = req.params.name.replace(/%20/g, " ");
-        Promise.all([User.findOne({ username: req.params.username }), Song.findOne({ name: songName })])
+        const username = req.params.username.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: username }), Song.findOne({ name: songName })])
             .then(([user, song]) => {
                 if (song) {
                     user.favourite.songs.push(song);
@@ -213,7 +227,8 @@ class UserController {
 
     addFVArtist(req, res, next) {
         const artistName = req.params.name.replace(/%20/g, " ");
-        Promise.all([User.findOne({ username: req.params.username }), Artist.findOne({ name: artistName })])
+        const username = req.params.username.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: username }), Artist.findOne({ name: artistName })])
             .then(([user, artist]) => {
                 if (artist) {
                     user.favourite.artists.push(artist);
@@ -228,7 +243,8 @@ class UserController {
 
     addFVPlaylist(req, res, next) {
         const playlistName = req.params.name.replace(/%20/g, " ");
-        Promise.all([User.findOne({ username: req.params.username }), Playlist.findOne({ name: playlistName })])
+        const username = req.params.username.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: username }), Playlist.findOne({ name: playlistName })])
             .then(([user, playlist]) => {
                 if (playlist) {
                     user.favourite.playlists.push(playlist);
@@ -243,7 +259,8 @@ class UserController {
 
     deleteFVSong(req, res, next) {
         const songName = req.params.name.replace(/%20/g, " ");
-        Promise.all([User.findOne({ username: req.params.username }), Song.findOne({ name: songName })])
+        const username = req.params.username.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: username }), Song.findOne({ name: songName })])
             .then(([user, song]) => {
                 if (song) {
                     user.favourite.songs = user.favourite.songs.filter(item => {
@@ -266,7 +283,8 @@ class UserController {
 
     deleteFVArtist(req, res, next) {
         const artistName = req.params.name.replace(/%20/g, " ");
-        Promise.all([User.findOne({ username: req.params.username }), Artist.findOne({ name: artistName })])
+        const username = req.params.username.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: username }), Artist.findOne({ name: artistName })])
             .then(([user, artist]) => {
                 if (artist) {
                     user.favourite.artists = user.favourite.artists.filter(item => {
@@ -287,7 +305,8 @@ class UserController {
 
     deleteFVPlaylist(req, res, next) {
         const playlistName = req.params.name.replace(/%20/g, " ");
-        Promise.all([User.findOne({ username: req.params.username }), Playlist.findOne({ name: playlistName })])
+        const username = req.params.username.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: username }), Playlist.findOne({ name: playlistName })])
             .then(([user, playlist]) => {
                 if (playlist) {
                     user.favourite.playlists = user.favourite.playlists.filter(item => {
@@ -308,8 +327,8 @@ class UserController {
 
     recentSongs(req, res, next) {
         const songName = req.params.name.replace(/%20/g, " ");
-       
-        Promise.all([User.findOne({ username: req.params.username }), Song.findOne({ name: songName })])
+        const username = req.params.username.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: username }), Song.findOne({ name: songName })])
             .then(([user, song]) => {
                 if (song) {
                     user.recent.songs.forEach((item, index) => {
@@ -330,7 +349,8 @@ class UserController {
 
     recentArtists(req, res, next) {
         const artistName = req.params.name.replace(/%20/g, " ");
-        Promise.all([User.findOne({ username: req.params.username }), Artist.findOne({ name: artistName })])
+        const username = req.params.username.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: username }), Artist.findOne({ name: artistName })])
             .then(([user, artist]) => {
                 if (artist) {
                     user.recent.artists.forEach((item, index) => {
@@ -351,7 +371,8 @@ class UserController {
 
     recentPlaylists(req, res, next) {
         const playlistName = req.params.name.replace(/%20/g, " ");
-        Promise.all([User.findOne({ username: req.params.username }), Playlist.findOne({ name: playlistName })])
+        const username = req.params.username.replace(/%20/g, " ");
+        Promise.all([User.findOne({ username: username }), Playlist.findOne({ name: playlistName })])
             .then(([user, playlist]) => {
                 if (playlist) {
                     user.recent.playlists.forEach((item, index) => {
