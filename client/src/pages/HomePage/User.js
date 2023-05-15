@@ -1,6 +1,7 @@
 import { useLocation, Link } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
 import ChangePasswordValidation from "../../Validation/ChangePasswordValidation";
+import ChangeUserInfo from "../../Validation/ChangeUserInfo";
 import axios from 'axios';
 
 function User(){
@@ -19,6 +20,7 @@ function User(){
         newpassword: '',
     });
     const [err, setErr] = useState({});
+    const [errUser, setErrUser] = useState({});
 
     const [reRender, setRerender] = useState(0);
 
@@ -39,12 +41,14 @@ function User(){
     }
 
     const handleSubmit = () => {
-        const UrlString = encodeURIComponent(info.avatar);
-        axios.get(`http://localhost:9000/user/changeinfo/${user.username}&${info.username}&${UrlString}`)
-            .then(res => {
-                form.current.style.display = "none";
-                setRerender(n => n + 1);
-            })
+        if (errUser.username === '' && errUser.avatar) {
+            const UrlString = encodeURIComponent(info.avatar);
+            axios.get(`http://localhost:9000/user/changeinfo/${user.username}&${info.username}&${UrlString}`)
+                .then(res => {
+                    form.current.style.display = "none";
+                    setRerender(n => n + 1);
+                })
+        }
     }
 
     const handleSubmit2 = () => {
@@ -69,6 +73,10 @@ function User(){
     useEffect(() => {
         setErr(ChangePasswordValidation(password, user.password));
     },[password])
+
+    useEffect(() => {
+        setErrUser(ChangeUserInfo(info));
+    }, [info])
 
     useEffect(() => {
         axios.get(`http://localhost:9000/user/${info.username}`)
@@ -120,6 +128,7 @@ function User(){
                             <img src={data.avatar} alt="img"/>
                         </div>
                         <input type="text" value={info.avatar} name="avatar" placeholder="Type your image link..." onChange={handleInput} autoComplete="off"/>
+                        {errUser.avatar && <p style={{color : "red"}}>* {errUser.avatar}</p>}
                     </div>
 
                     <div className="username">
@@ -129,6 +138,7 @@ function User(){
                         </div>
 
                         <input type="text" id="name" value={info.username} name="username" placeholder="Type your username..." onChange={handleInput} autoComplete="off"/>
+                        {errUser.username && <p style={{color : "red"}}>* {errUser.username}</p>}
                     </div>
                 </div>
                 

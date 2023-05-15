@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from "react-redux";
 import { setCurrentPlaying, setPlaylist } from "../../actions/actions";
+import ChangePlaylistInfo from '../../Validation/ChangePlaylistInfo';
 import axios from 'axios';
 
 function SongsDisplay() {
@@ -21,6 +22,7 @@ function SongsDisplay() {
         name: '',
         image: '',
     });
+    const [err, setErr] = useState({});
 
     const handlePlay = (index) => {
         axios.get(`http://localhost:9000/user/recent/songs/${data.songs[index].name}&${user.username}`)
@@ -98,12 +100,14 @@ function SongsDisplay() {
     }
 
     const handleSubmit = () => {
-        const UrlString = encodeURIComponent(info.image);
-        axios.get(`http://localhost:9000/user/playlist/change/${user.username}&${data.name}&${info.name}&${UrlString}`)
-            .then(res => {
-                form.current.style.display = "none";
-                setRerender(n => n + 1);
-            })
+        if (err.name === '' && err.image === '') {
+            const UrlString = encodeURIComponent(info.image);
+            axios.get(`http://localhost:9000/user/playlist/change/${user.username}&${data.name}&${info.name}&${UrlString}`)
+                .then(res => {
+                    form.current.style.display = "none";
+                    setRerender(n => n + 1);
+                })
+        }
     }
 
     useEffect(() => {
@@ -129,6 +133,10 @@ function SongsDisplay() {
                 })
                 .catch(err => { console.log(err); })
     },[reRender])
+
+    useEffect(() => {
+        setErr(ChangePlaylistInfo(info));
+    }, [info])
 
     return (
         <>
@@ -246,6 +254,7 @@ function SongsDisplay() {
                             <img src={data.image} alt="img"/>
                         </div>
                         <input type="text" value={info.image} name="image" placeholder="Type your image link..." onChange={handleInput2} autoComplete="off"/>
+                        {err.name && <p style={{color : "red"}}>* {err.name}</p>}
                     </div>
 
                     <div className="username">
@@ -255,6 +264,7 @@ function SongsDisplay() {
                         </div>
 
                         <input type="text" id="name" value={info.name} name="name" placeholder="Type your username..." onChange={handleInput2} autoComplete="off"/>
+                        {err.image && <p style={{color : "red"}}>* {err.image}</p>}
                     </div>
                 </div>
                 
