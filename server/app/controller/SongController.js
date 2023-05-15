@@ -36,7 +36,7 @@ class SongController{
               totalLikes: { $sum: "$like" }
             }},
             { $sort: { totalLikes: -1 } }
-          ])])
+          ]).limit(4)])
           .then(([songs, artists]) => {
             const artistArr = artists.map(artist => {
                 return Artist.findOne({ name: artist._id }).lean().exec()
