@@ -51,13 +51,17 @@ B5: Thưởng thức âm nhạc mà bạn thích
 5. Một số hình ảnh về giao diện project
 
 * Giao diện đăng nhập
+
   <img width="282" alt="image" src="https://github.com/HungVu0112/Music_web/assets/100528129/e79ba927-6654-4bc1-9dc0-e2d6def870e8">
 
 * Giao diện thông tin tài khoản
- <img width="299" alt="image" src="https://github.com/HungVu0112/Music_web/assets/100528129/7133d90d-ee42-4d66-87cf-c973c6515a09">
+
+<img width="299" alt="image" src="https://github.com/HungVu0112/Music_web/assets/100528129/7133d90d-ee42-4d66-87cf-c973c6515a09">
 
 * Giao diện trang chủ
+
   <img width="433" alt="image" src="https://github.com/HungVu0112/Music_web/assets/100528129/bdbefa74-1266-4206-8e50-83ccc9c0c81f">
 
 * Giao diện tìm kiếm
+
  <img width="433" alt="image" src="https://github.com/HungVu0112/Music_web/assets/100528129/5a03a84f-56c6-4fab-978f-cd751f835f15">
