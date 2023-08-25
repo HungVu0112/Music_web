@@ -4,7 +4,7 @@
 Trong xã hội hiện nay, khi Internet đang dần phủ sóng khắp toàn cầu, con người đang ngày càng được toàn cầu hoá. Song song với việc phát triển đó, nhu cầu về các dịch vụ giải trí, giải toả căng thẳng áp lực, … cũng được phát triển một cách chóng mặt. Nguyên do chính là do khi thế giới ngày càng “phẳng” chúng ta lại càng phải đối mặt với nhiều áp lực cũng như stress hơn trong cuộc sống từ gia đình, bạn bè, xã hội, …. Từ đó chúng em muốn tạo một trang web nghe nhạc để thoả mãn nhu cầu thư giãn của người dùng. 
 
 1.2 Tầm quan trọng của âm nhạc trong cuộc sống
- m nhạc là một phần quan trọng không thể thiếu trong cuộc sống con người. Ta thường chỉ thấy rằng âm nhạc đơn giản là công cụ để giải trí nhưng thực chất giá trị của nó là lớn hơn thế rất nhiều. Đó như là một ngôn ngữ, phương tiện riêng để giao tiếp, truyền tải tình cảm và cảm xúc giữa con người. 
+ trị âm nhạc là một phần quan trọng không thể thiếu trong cuộc sống con người. Ta thường chỉ thấy rằng âm nhạc đơn giản là công cụ để giải trí nhưng thực chất giá trị của nó là lớn hơn thế rất nhiều. Đó như là một ngôn ngữ, phương tiện riêng để giao tiếp, truyền tải tình cảm và cảm xúc giữa con người. 
 
 1.3  Mục đích dự án
 Một trang web nghe nhạc chuyên nghiệp với chất lượng tốt, được xây dựng và phát triển với các tính năng nâng cao để phục vụ người dùng. Trang web sẽ cung cấp cho người dùng khả năng tìm kiếm, phát, tải và chia sẻ nhạc một cách dễ dàng, nhanh chóng. 
