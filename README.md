@@ -34,8 +34,7 @@ Một trang web nghe nhạc chuyên nghiệp với chất lượng tốt, đư�
 - 3 tháng kể từ ngày 7/3
 
 2. Vai trò trong dự án
-- Đóng vai trò Leader trong nhóm 4 người, phân công và triển khai các công việc của mỗi người
-- Vai trò trong việc lập trình : Thiết kế giao diện bằng ReactJs và thiết kế API phía Backend
+- Fullstack
 
 3.1 Điểm nhấn về mặt kỹ thuật và chỗ mình đầu tư công sức nhất
 - Điểm nhấn : sử dụng Reducer để có thể liên tục cập nhật vị trí con trỏ trên thanh phát nhạc theo thời gian chạy nhạc
