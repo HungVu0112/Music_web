@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { setCurrentPlaying, setPlaylist } from '../../actions/actions';
 import axios from 'axios';
 
-
 function PlaylistDisplay() {
     const userJSON = sessionStorage.getItem("account");
     const user = JSON.parse(userJSON);
