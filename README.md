@@ -37,9 +37,13 @@ Một trang web nghe nhạc chuyên nghiệp với chất lượng tốt, đư�
 - Đóng vai trò Leader trong nhóm 4 người, phân công và triển khai các công việc của mỗi người
 - Vai trò trong việc lập trình : Thiết kế giao diện bằng ReactJs và thiết kế API phía Backend
 
-3. Điểm nhấn về mặt kỹ thuật và chỗ mình đầu tư công sức nhất
+3.1 Điểm nhấn về mặt kỹ thuật và chỗ mình đầu tư công sức nhất
 - Điểm nhấn : sử dụng Reducer để có thể liên tục cập nhật vị trí con trỏ trên thanh phát nhạc theo thời gian chạy nhạc
 - Điểm đầu tư công sức nhất : Vì lần làm bài tập này là lúc em mới bắt đầu tiếp cận react nên việc sử dụng Reducer tốn khá nhiều thời gian của em.
+
+3.2 Điểm nhấn về chức năng trang web
+- Bạn có thể chia sẻ danh sách mình tự làm và thu thập các lượt likes để leo top
+- Ngoài ra cũng có thể lưu lại danh sách nhạc của người khác trên trang cộng đồng nếu bạn thực sự thích nó
 
 4. Cách build/run
 B1: Clone code về một folder trống trong máy
@@ -52,16 +56,48 @@ B5: Thưởng thức âm nhạc mà bạn thích
 
 * Giao diện đăng nhập
 
-  <img width="282" alt="image" src="https://github.com/HungVu0112/Music_web/assets/100528129/e79ba927-6654-4bc1-9dc0-e2d6def870e8">
+  ![image](https://github.com/HungVu0112/Music_web/assets/100528129/6ba73aa2-a36d-4a3f-9e7e-6a4db869e948)
+
+  ![image](https://github.com/HungVu0112/Music_web/assets/100528129/10a3baa0-65e6-469d-ac5f-68844c652650)
+
+* Giao diện các trang
+
++ Trang Home
+
+![image](https://github.com/HungVu0112/Music_web/assets/100528129/801551b2-fdb8-4e80-aa3e-5aa9d188b8cf)
+
++ Trang tìm kiếm
+
+![image](https://github.com/HungVu0112/Music_web/assets/100528129/44b360c1-1a0c-4b00-a4d3-924ea850868e)
+
++ Trang Artist
+
+![image](https://github.com/HungVu0112/Music_web/assets/100528129/6477ba39-e2d6-4e6f-adb0-8810403d3c8a)
+
++ Trang Playlist
+
+![image](https://github.com/HungVu0112/Music_web/assets/100528129/6ca537bb-cb3b-4687-b8a6-85f455c9f1b8)
+
++ Trang Thư viện
+
+![image](https://github.com/HungVu0112/Music_web/assets/100528129/54ca4dd1-56a8-4394-ab42-de6c28935f62)
+
++ Trang Cộng đồng
+
+![image](https://github.com/HungVu0112/Music_web/assets/100528129/29bcd5f1-6817-4f44-a433-87cb6f87a40f)
 
 * Giao diện thông tin tài khoản
 
-<img width="299" alt="image" src="https://github.com/HungVu0112/Music_web/assets/100528129/7133d90d-ee42-4d66-87cf-c973c6515a09">
+![image](https://github.com/HungVu0112/Music_web/assets/100528129/1ac82749-19d0-4b89-a991-49e026f13c70)
 
-* Giao diện trang chủ
+* Giao diện Light Mode
 
-  <img width="433" alt="image" src="https://github.com/HungVu0112/Music_web/assets/100528129/bdbefa74-1266-4206-8e50-83ccc9c0c81f">
+![image](https://github.com/HungVu0112/Music_web/assets/100528129/3df8616a-4b3e-43e8-938e-ea0be20b2f55)
 
-* Giao diện tìm kiếm
+* Giao diện khi click vào 1 trang Playlist và ...
 
- <img width="433" alt="image" src="https://github.com/HungVu0112/Music_web/assets/100528129/5a03a84f-56c6-4fab-978f-cd751f835f15">
+
+
+
+ 
+
