@@ -96,6 +96,19 @@ B5: Thưởng thức âm nhạc mà bạn thích
 
 * Giao diện khi click vào 1 trang Playlist và ...
 
+![image](https://github.com/HungVu0112/Music_web/assets/100528129/1dcfc5ac-3a1b-405c-aed7-ebe0dced324c)
+
+![image](https://github.com/HungVu0112/Music_web/assets/100528129/4b3d2469-9ac9-4b16-a036-ff6618278471)
+
+![image](https://github.com/HungVu0112/Music_web/assets/100528129/3fd3e51e-ac11-4bb8-bc61-318ba1281baa)
+
+* Khi nghe nhạc
+
+![image](https://github.com/HungVu0112/Music_web/assets/100528129/26a4ed75-2db6-442f-b4db-a5b0b0cf66f5)
+
+
+
+
 
 
 
