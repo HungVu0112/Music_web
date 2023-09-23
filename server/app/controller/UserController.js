@@ -3,6 +3,8 @@ const Playlist = require('../model/Playlist');
 const Song = require('../model/Song');
 const Artist = require('../model/Artist');
 const Post = require('../model/Post');
+const bcrypt = require('bcryptjs');
+const saltRounds = 10;
 
 class UserController {
     changeInfo(req, res, next) {
@@ -68,7 +70,16 @@ class UserController {
         User.findOne({email: req.body.email})
             .then(user => {
                 if (user) {
-                    res.json(user);
+                    bcrypt.compare(req.body.password, user.password)
+                        .then(check => {
+                            if (check) {
+                                res.json(user);
+                            }
+                            else {
+                                res.json('not exists');
+                            }
+                        })
+                        .catch(err => console.log(err))
                 }
                 else {
                     res.json('not exists');
@@ -78,10 +89,11 @@ class UserController {
     }
 
     checkSignup(req, res, next) {
+        const username = req.body.username.replace(/ /g, "%20");
         User.findOne({email: req.body.email})
           .then(user => {
                 if (!user) {
-                    req.body.avatar = 'https://i0.wp.com/310ai.com/wp-content/uploads/2022/10/face.jpg?fit=1024%2C1024&ssl=1';
+                    req.body.avatar = 'img/user-default.png';
                     req.body.recent = {
                         songs: [],
                         artists: [],
@@ -92,9 +104,15 @@ class UserController {
                         artists: [],
                         playlists: [],
                     };
-                    const new_user = new User(req.body);
-                    new_user.save();
-                    res.json('OK');
+                    bcrypt.hash(req.body.password, saltRounds)
+                        .then(hash => {
+                            req.body.password = hash;
+                            req.body.username = username;
+                            const new_user = new User(req.body);
+                            new_user.save();
+                            res.json('OK');
+                        })
+                        .catch(err => console.log(err))
                 }
                 else {
                     res.json('exists');

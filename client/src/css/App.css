@@ -37,11 +37,11 @@ html {
 .scroll-bar::-webkit-scrollbar-thumb {
   background-color: var(--text--color);
 }
-
+/* 
 /* Authentical */
 
 /* Login */
-.login, .signup {
+/* .login, .signup {
   position: relative;
   width: 100%;    
   height: 100vh;
@@ -65,8 +65,6 @@ html {
 
 }
 
-
-/* Signup */
 .signup .form {
   position: absolute;
   top: 5%;
@@ -78,7 +76,7 @@ html {
   border: 5px solid #e4335c;
 }
 
-/* Both used */
+
 .err-message {
   color: red;
 }
@@ -150,7 +148,6 @@ html {
   margin-top: 60px;
 }
 
-/* End Authentication */
 
 /* Homepage */
 .homepage {
