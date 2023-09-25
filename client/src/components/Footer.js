@@ -20,7 +20,9 @@ function Footer(props) {
     const [seekTime, setSeekTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [currTime, setCurrTime] = useState(0);
-    const src = `http://localhost:3000/${props.music.sound}`;
+    const src = props.music.sound;
+
+    console.log(src);
 
     const audioElement = useRef();
     const dispatch = useDispatch();

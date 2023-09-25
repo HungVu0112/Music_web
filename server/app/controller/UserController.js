@@ -89,7 +89,6 @@ class UserController {
     }
 
     checkSignup(req, res, next) {
-        const username = req.body.username.replace(/ /g, "%20");
         User.findOne({email: req.body.email})
           .then(user => {
                 if (!user) {

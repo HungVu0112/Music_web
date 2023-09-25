@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import Search from './Search';
 import Footer from '../../components/Footer';
 import axios from 'axios';
+import HeaderCSS from '../../css/header.module.css';
 
 function PageContent({children}) {
     const userJSON = sessionStorage.getItem("account");
@@ -83,8 +84,8 @@ function PageContent({children}) {
     },[playlists])
     
     return (
-    <div className='homepage dark'  ref={homePage}>
-        <div className='sidebar' ref={sidebar}>
+    <div className='homepage dark' ref={homePage}>
+        <div className={`${HeaderCSS.sidebar} ${HeaderCSS.dark_}`} ref={sidebar}>
             <Header homePage={homePage} sidebar={sidebar} />
         </div>
         <div className='content'>

@@ -1,0 +1,198 @@
+@import './App.css';
+
+/* Header */
+
+.sidebar .text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text--color);
+}
+  
+@keyframes rotating {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.website_logo img{
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+    margin-top: 6px;
+    margin-right: 8px;
+	animation-name:rotating;
+	animation-timing-function: linear;
+	animation-duration: 700ms;
+	animation-iteration-count: infinite;
+}
+
+.title_combo > div {
+	vertical-align: middle;
+	display: inline-block;
+}
+
+  /* Sidebar */
+.sidebar {
+    padding: 5px 7px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 220px;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    background: var(--sidebar-color);
+}
+  
+.sidebar li {
+    height: 50px;
+    margin-top: 10px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+  
+.sidebar li .icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    font-size: 20px;
+}
+  
+.sidebar li .icons,
+.sidebar li .text {
+    color: var(--text--color);
+    transition: var(--tran-02);
+}
+  
+.sidebar header {
+    position: relative;
+}
+  
+.header_text .name {
+    font-weight: 600;
+    font-size: 32px;
+}
+  
+.header_text .profession {
+    margin-top: -2px;
+}
+  
+.sidebar .menu {
+    margin-top: 10px;
+}
+  
+.sidebar .bottom-content {
+    margin-bottom: 20px;
+}
+  
+.sidebar li a {
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    transition: var(--tran-04);
+}
+   
+.sidebar li a:hover,
+.menu_bar li .active {
+    background: var(--primary-color);
+}
+  
+.sidebar li a:hover .icons,
+.sidebar li a:hover .text,
+.menu li .active .icons,
+.menu_bar li .active .text {
+    color: var(--sidebar-color);
+}
+  
+.sidebar .menu_bar {
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+}
+  
+.sidebar .bottom_content {
+    margin-top: 240px;
+}
+
+.menu_bar .mode {
+    position: relative;
+    border-radius: 6px;
+    background: var(--primary-color-light);
+    overflow: hidden;
+}
+  
+.menu_bar .mode .moon_sun {
+    height: 50px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+}
+  
+.menu_bar .mode i {
+    position: absolute;
+    transition: var(--tran-03);
+}
+  
+.menu_bar .mode i.sun {
+    opacity: 0;
+}
+  
+.menu_bar .mode .toggle_switch {
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-width: 60px;
+    cursor: pointer;
+    background: var(--primary-color-light);
+}
+  
+.toggle_switch .switch {
+    position: relative;
+    height: 22px;
+    width: 44px;
+    border-radius: 25px;
+    background: var(--toggle-color);
+}
+  
+.switch::before {
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background: var(--sidebar-color);
+    transition: var(--tran-03);
+}
+
+.sidebar.dark_ li a:hover .icons,
+.sidebar.dark_ li a:hover .text,
+.sidebar.dark_ .menu li .active .icons,
+.sidebar.dark_ .menu_bar li .active .text {
+    color: var(--text--color);
+}
+
+.sidebar.dark_ .menu_bar .mode i.sun {
+  opacity: 1;
+}
+
+.sidebar.dark_ .menu_bar .mode i.moon {
+  opacity: 0;
+}  
+
+.sidebar.dark_ .switch::before {
+    left: 24px;
+}
+  
+/* End Header */ 
