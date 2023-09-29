@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import Songcard from "../../components/Songcard";
-import Card from "../../components/card";
 import axios from 'axios';
 
 function RecentPlayed() {
@@ -27,7 +25,7 @@ function RecentPlayed() {
 
     return (
         <div className="recent main-content">
-            <div className="display scroll-bar">
+            {/* <div className="display scroll-bar">
                 <h1 className="text">・Songs</h1>
                 {recent !== null ? 
                     recent.songs.reverse().map((song, index) => {
@@ -49,7 +47,7 @@ function RecentPlayed() {
                     recent.playlists.reverse().map((playlist, index) => {
                         return <Card img={playlist.image} name={playlist.name} key={index} path="playlist" state={playlist}/>
                 }) : ""}
-            </div>
+            </div> */}
         </div>
     );
 }

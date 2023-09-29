@@ -13,6 +13,15 @@ class SearchAllController{
             })
             .catch(next);
     }
+
+    getArtists(req, res, next) {
+        const name = req.params.name.replace(/%20/g, ' ');
+        Artist.find({ name: { $regex : new RegExp(`${name}`, 'i') } })
+            .then(artists => {
+                res.json(artists);
+            })
+            .catch(next);
+    }
 }
 
 module.exports = new SearchAllController;

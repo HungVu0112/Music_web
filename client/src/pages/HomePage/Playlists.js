@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'; 
 import axios from 'axios';
-import Card from '../../components/card';
 
 function Playlists() {
     const [data, setData] = useState([]);
@@ -16,7 +15,7 @@ function Playlists() {
 
     return (
         <div className="playlists main-content">
-            <div className="title">
+            {/* <div className="title">
                 <h1 className="text">Playlists</h1>
             </div>
 
@@ -25,7 +24,7 @@ function Playlists() {
                 { data.map((playlist, index) => {
                     return <Card img={playlist.image} name={playlist.name} key={index} path="playlist" state={playlist}/>
                 })}
-            </div>
+            </div> */}
         </div>
     )
 }

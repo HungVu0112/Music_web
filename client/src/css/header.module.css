@@ -140,6 +140,10 @@
 }
   
 .menu_bar .mode i.sun {
+    opacity: 1;
+}
+
+.menu_bar .mode i.moon {
     opacity: 0;
 }
   
@@ -184,11 +188,11 @@
 }
 
 .sidebar.dark_ .menu_bar .mode i.sun {
-  opacity: 1;
+  opacity: 0;
 }
 
 .sidebar.dark_ .menu_bar .mode i.moon {
-  opacity: 0;
+  opacity: 1;
 }  
 
 .sidebar.dark_ .switch::before {

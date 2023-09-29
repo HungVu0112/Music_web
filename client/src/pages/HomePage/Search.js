@@ -1,7 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import Card from '../../components/card';
-import Songcard from '../../components/Songcard';
 import axios from 'axios';
 
 function Search({ searchData }) {
@@ -43,7 +41,7 @@ function Search({ searchData }) {
 
     return (
         <div className="searchPage main-content">
-            <div className="title">
+            {/* <div className="title">
                 <h1 className="text" ref={title}>{searchData.length === 0 ? "Recommend" : "Result"}</h1>
             </div>
             
@@ -123,7 +121,7 @@ function Search({ searchData }) {
                             </>
                         )}
                     </div>
-            </div>            
+            </div>             */}
         </div>
     );
 }

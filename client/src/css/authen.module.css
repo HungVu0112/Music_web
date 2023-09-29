@@ -107,7 +107,7 @@ h1 {
     font-size: 16px;
 }
 
-button {
+.submit_btn {
     position: relative;
     isolation: isolate;
     width: 100%;
@@ -123,7 +123,7 @@ button {
     color: rgba(0, 0, 0, 0.5);
 }
 
-button::after {
+.submit_btn::after {
     content: '';
     position: absolute;
     z-index: -1;
@@ -135,17 +135,17 @@ button::after {
     border-radius: 5px;
 }
 
-button:hover::after,
-button:focus-visible::after {
+.submit_btn:hover::after,
+.submit_btn:focus-visible::after {
     transform-origin: left;
     scale: 1 1;
 }
 
-.login button {
+.login .submit_btn {
     margin-top: 56px;
 }
 
-.signup button {
+.signup .submit_btn {
     margin-top: 32px;
 }
 

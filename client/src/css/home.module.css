@@ -1,0 +1,118 @@
+@import './App.css';
+
+.header {
+    padding: 32px;
+    width: 100%;
+    height: 400px;
+    background-image: url("/public/img/home-head.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+    box-shadow: 0 -100px 50px -30px inset var(--body-color);
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    color: #fff;
+}
+
+.header .view_btn {
+    width: 120px;
+    height: 40px;
+    background-color: #eb8b34;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    color: #faebd7;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.header .view_btn:hover {
+    opacity: 0.8;
+}
+
+.header .header_text p {
+    margin-top: 8px;
+    font-size: 18px;
+    margin-left: 8px;
+}
+
+.body {
+    padding: 32px;
+}
+
+.body .parts {
+    margin-top: 48px;
+    display: flex;
+}
+
+.body .parts .photo {
+    display: flex;
+    gap: 16px;
+}
+
+.body .parts .photo img {
+    border: 1px solid #333;
+    border-radius: 4px;
+}
+
+.body .parts .photo .photo_r2 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.body .parts .suggest {
+    margin-left: 16px;
+    width: 100%;
+    height: 440px;
+    box-shadow: 0 -80px 60px -80px inset grey;
+}
+
+.body .parts .suggest .titles {
+    display: flex;
+}
+
+.body .parts .suggest .titles>div {
+    width: 160px;
+    height: 60px;
+    color: #faebd7;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.body .parts .suggest .titles .active {
+    border-bottom: 4px solid #faebd7;
+}
+
+.body .parts .suggest .title_info {
+    width: 100%;
+    height: calc(100% - 76px);
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: scroll;
+}
+
+.body .parts .suggest .title_info::-webkit-scrollbar-track
+{
+	background-color: transparent;
+}
+
+.body .parts .suggest .title_info::-webkit-scrollbar
+{
+	width: 10px;
+    height: 8px;
+	background-color: transparent;
+}
+
+.body .parts .suggest .title_info::-webkit-scrollbar-thumb
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #eb8b34;
+}

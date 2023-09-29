@@ -1,0 +1,46 @@
+@import './App.css';
+
+.song_box {
+    padding: 8px;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #e0e0e042;
+}
+  
+.song_box:hover {
+    opacity: 0.8;
+}
+
+.song_info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+  
+.song_info img {
+    width: 60px;
+    height: 60px;
+}
+  
+.song_info .song_text {
+    color: #faebd7;
+}
+  
+.play_btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #1ab85e;
+    margin-right: 16px;
+    display: none;
+}
+
+.song_box:hover .play_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import Songcard from "../../components/Songcard";
-import Card from "../../components/card";
 import axios from 'axios';
 
 function Favourite() {
@@ -18,7 +16,7 @@ function Favourite() {
     
     return (
         <div className="favourite main-content">
-            <div className="display scroll-bar">
+            {/* <div className="display scroll-bar">
                 <h1 className="text">・Songs</h1>
                 {favourite !== null ? 
                     favourite.songs.map((song, index) => {
@@ -40,7 +38,7 @@ function Favourite() {
                     favourite.playlists.map((playlist, index) => {
                         return <Card img={playlist.image} name={playlist.name} key={index} path="playlist" state={playlist}/>
                 }) : ""}
-            </div>
+            </div> */}
         </div>
     );
 }

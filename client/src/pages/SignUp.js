@@ -81,7 +81,7 @@ function SignUp() {
                             </div>
                             {formik.errors.confirmPassword && formik.touched.confirmPassword && (<p className={authenCSS.err}>{formik.errors.confirmPassword}</p>)}
 
-                            <button type='submit'>Signup</button>
+                            <button type='submit' className={authenCSS.submit_btn}>Signup</button>
                         </form>
 
                         <p className={authenCSS.link}>Already have an account ? <Link to='/' replace={true}>Login</Link> here !</p>
