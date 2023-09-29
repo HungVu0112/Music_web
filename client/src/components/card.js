@@ -2,7 +2,7 @@ import CardCSS from '../css/card.module.css';
 
 function Card({type, img, name, description}) {
     return (
-        <div className={`${CardCSS.card} ${type === 'artist' && CardCSS.artist_card}`}>
+        <div className={`${CardCSS.card} ${type === 'artist' && CardCSS.artist_card} ${type === 'playlist' && CardCSS.playlist_card}` }>
             <div className={CardCSS.card_head}>
                 <img src={img} />
                 {type !== "artist" && (

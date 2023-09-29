@@ -15,6 +15,11 @@
     width: 300px;
     height: 350px;
 }
+
+.playlist_card {
+    width: 300px;
+    height: 400px;
+}
   
 .card:hover {
     cursor: pointer;
@@ -29,6 +34,11 @@
 }
 
 .artist_card .card_head {
+    height: 284px;
+    border-radius: 50%;
+}
+
+.playlist_card .card_head {
     height: 284px;
 }
   

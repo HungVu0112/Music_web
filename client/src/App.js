@@ -11,7 +11,7 @@ import Favourite from './pages/HomePage/Favourites';
 import MyPlaylist from './pages/HomePage/MyPlaylist';
 import Community from './pages/HomePage/Community';
 import Search from './pages/HomePage/Search';
-import Playlists from './pages/HomePage/Playlists';
+import Albums from './pages/HomePage/Albums';
 import SongsDisplay from './pages/HomePage/SongsDisplay';
 import PlaylistDisplay from './pages/HomePage/PlaylistDisplay';
 import Shared from './pages/HomePage/Shared';
@@ -35,7 +35,7 @@ function App() {
         <Route exact path='/library/shared' element={<PageContent><Shared /></PageContent>} />
         <Route exact path='/community' element={<PageContent><Community /></PageContent>} />
         <Route exact path='/community/playlist/:playlistID' element={<PageContent><PostPlaylist /></PageContent>} />
-        <Route exact path='/playlists' element={<PageContent><Playlists /></PageContent>} />
+        <Route exact path='/albums' element={<PageContent><Albums /></PageContent>} />
         <Route exact path='/playlists/:name' element={<PageContent><PlaylistDisplay /></PageContent>} />
         <Route exact path='/library/myPlaylist' element={<PageContent><MyPlaylist /></PageContent>} />
         <Route exact path='/library/myPlaylist/create' element={<PageContent><SongsDisplay /></PageContent>} />
