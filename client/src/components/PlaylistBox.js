@@ -1,21 +1,39 @@
 import PlaylistBoxCSS from '../css/playlistbox.module.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-function PlaylistBox ({ index, playlist }) {
+function PlaylistBox ({ type, index, playlist, setReload }) {
+    const userJSON = sessionStorage.getItem("account");
+    const user = JSON.parse(userJSON);
+
+    const handleDelete = () => {
+        axios.get(`http://localhost:9000/user/playlist/delete/${index}&${user._id}`)
+            .then(res => {
+                setReload(n => n + 1);
+            })
+            .catch(err => console.log(err))
+    }
+
     return (
-        <div className={PlaylistBoxCSS.playlist_box}>
+        <div className={`${PlaylistBoxCSS.playlist_box} ${type === "small" && PlaylistBoxCSS.small}`}>
             <div>
-                <p className={PlaylistBoxCSS.index}>{index}</p>
+                {type === "big" && <p className={PlaylistBoxCSS.index}>{index + 1}</p>}
 
-                <div className={PlaylistBoxCSS.heading}>
+                <div className={`${PlaylistBoxCSS.heading} ${type === "small" && PlaylistBoxCSS.small}`}>
                     <img src={playlist.image} alt="Pic" />
-                    <Link to='/home'><h3>{playlist.name}</h3></Link>
+                    <Link to={`/library/myPlaylist/${playlist._id}`} state={playlist}><h3>{playlist.name}</h3></Link>
                 </div>
 
-                <p className={PlaylistBoxCSS.s_count}>Song: {playlist.songs.length}</p>
+                {type === "big" && <p className={PlaylistBoxCSS.s_count}>Song: {playlist.songs.length}</p>}
             </div>
 
-            {playlist.isShared && <i className='bx bxs-navigation'></i>}
+            <div>
+                {playlist.isShared && type === "big" && <i className='bx bxs-navigation'></i>}
+                <div className={PlaylistBoxCSS.delete}>
+                    <p onClick={handleDelete}>Delete</p>
+                </div>
+            </div>
+               
         </div>
     )
 }

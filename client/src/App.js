@@ -39,7 +39,7 @@ function App() {
         <Route exact path='/playlists/:name' element={<PageContent><PlaylistDisplay /></PageContent>} />
         <Route exact path='/library/myPlaylist' element={<PageContent><MyPlaylist /></PageContent>} />
         <Route exact path='/library/myPlaylist/create' element={<PageContent><SongsDisplay /></PageContent>} />
-        <Route exact path='/library/myPlaylist/:name' element={<PageContent><SongsDisplay /></PageContent>} />
+        <Route exact path='/library/myPlaylist/:id' element={<PageContent><SongsDisplay /></PageContent>} />
         <Route exact path='/user' element={<PageContent><User /></PageContent>} />
       </Routes>
     </div>

@@ -144,19 +144,20 @@ class UserController {
     }
 
     createPlaylist(req, res, next) {
-        const username = req.params.name.replace(/%20/g, " ");
-        User.findOne({ username: username })
+        User.findOne({ _id: new ObjectId(req.params.id) })
             .then(user => {
                 var count = user.playlists.length + 1;
                 
                 const name = `Playlist ${count}`;
                 const image = "https://i.icanvas.com/list-square/instruments-JCA5.jpg";
                 var songs = [];
+                var isShared = false;
 
                 const playlist = new Playlist({
-                    name: name,
-                    image: image,
-                    songs: songs
+                    name,
+                    image,
+                    songs,
+                    isShared
                 })
 
                 user.playlists.push(playlist);
@@ -168,22 +169,21 @@ class UserController {
     }
 
     deletePlaylist(req, res, next) {
-        const username = req.params.username.replace(/%20/g, " ");
-        User.findOne({ username: username })
-            .then(user =>{
-                const _id = user.playlists[req.params.id]._id.toString();
-                const checkShared = user.playlists[req.params.id].isShared;
+        User.findOne({ _id: new ObjectId(req.params.uid) })
+            .then(user => {
+                const _id = user.playlists[req.params.pid]._id.toString();
+                const checkShared = user.playlists[req.params.pid].isShared;
 
-                user.playlists.splice(req.params.id, 1);
+                user.playlists.splice(req.params.pid, 1);
                 user.save();
                 
-                if (checkShared) {
-                    Post.deleteOne({ 'user.username': username, 'playlist._id': _id})
-                        .then(post => {
-                            res.json("ok");
-                        })
-                        .catch(err => { console.log(err); });
-                }
+                // if (checkShared) {
+                //     Post.deleteOne({ 'user.username': username, 'playlist._id': _id})
+                //         .then(post => {
+                //             res.json("ok");
+                //         })
+                //         .catch(err => { console.log(err); });
+                // }
 
                 res.json("ok");
             })  

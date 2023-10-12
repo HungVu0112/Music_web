@@ -13,6 +13,13 @@
     color: #faebd7;
 }
 
+.playlist_box.small {
+    padding: 16px;
+    margin-top: 8px;
+    width: 100%;
+    background: #131313;
+}
+
 .playlist_box > div {
     display: flex;
     align-items: center;
@@ -20,6 +27,7 @@
 
 .playlist_box .index {
     margin-left: 16px;
+    width: 20px;
     font-weight: 600;
     font-size: 20px;
 }
@@ -31,10 +39,19 @@
     gap: 16px;
 }
 
+.playlist_box .heading.small {
+    margin-left: 0;
+}
+
 .playlist_box .heading img {
     width: 70px;
     height: 70px;
     border-radius: 50%;
+}
+
+.playlist_box .heading.small img {
+    width: 60px;
+    height: 60px;
 }
 
 .playlist_box .heading a {
@@ -55,5 +72,21 @@
 .playlist_box i {
     font-size: 32px;
     margin-right: 16px;
+}
+
+.playlist_box .delete {
+    padding: 8px;
+    width: 90px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #707070cc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playlist_box .delete:hover {
+    opacity: 0.8;
+    cursor: pointer;
 }
 

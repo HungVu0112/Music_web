@@ -16,11 +16,11 @@ router.get('/user/favourite/playlists/delete/:username&:name', userController.de
 router.get('/user/favourite/songs/:name&:username', userController.addFVSong);
 router.get('/user/favourite/artists/:name&:username', userController.addFVArtist);
 router.get('/user/favourite/playlists/:username&:name', userController.addFVPlaylist);
-router.get('/user/playlist/create/:name', userController.createPlaylist);
+router.get('/user/playlist/create/:id', userController.createPlaylist);
 router.get('/user/playlist/change/:username&:name&:newname&:link', userController.changeInfoPlaylist);
 router.get('/user/playlist/searchSong/:name&:playlistName&:username', userController.searchSong);
 router.get('/user/playlist/addSong/:name&:playlistName&:username', userController.addSong);
-router.get('/user/playlist/delete/:id&:username', userController.deletePlaylist);
+router.get('/user/playlist/delete/:pid&:uid', userController.deletePlaylist);
 router.get('/user/playlist/:name&:username', userController.getPlaylist);
 router.get('/user/changepw/:username&:newpassword', userController.changePw);
 router.get('/user/changeinfo/:username&:newusername&:newavatar', userController.changeInfo);
