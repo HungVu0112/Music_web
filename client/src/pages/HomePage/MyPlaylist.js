@@ -1,63 +1,42 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import MyPlaylistCSS from '../../css/myplaylist.module.css';
+import PlaylistBox from '../../components/PlaylistBox';
 import axios from 'axios';
 
 function MyPlaylist() {
-    const [data, setData] = useState({});
-    const [count, setCount] = useState(0);
-    let navigate = useNavigate();
+    const [playlists, setPlaylists] = useState([]);
     const userJSON = sessionStorage.getItem("account");
     const user = JSON.parse(userJSON);
 
-    const handleDelete = (e) => {
-        const index = e.target.value;
-
-        axios.get(`http://localhost:9000/user/playlist/delete/${index}&${user.username}`)
-            .then(res => {
-                setCount(n => n + 1);
-            })
-            .catch(err => {console.log(err);});
-    }
-
     useEffect(() => {
-        axios.get(`http://localhost:9000/user/${user.username}`, data)
+        axios.get(`http://localhost:9000/user/${user._id}`)
             .then(res => {
-                setData(res.data);
+                setPlaylists(res.data.playlists);
             })
-            .catch(err => { console.log(err); })
-    }, [count])
+            .catch(err => console.log(err));
+    }, [])
 
     return (
-        <div className="my-playlists main-content">
-            <div className="title">
-                <h1 className="text">My Playlists</h1>
-                <Link to="/library/myPlaylist/create"><i className='bx bx-plus'></i></Link>
+        <div className={`${MyPlaylistCSS.my_playlist} main-content`}>
+            <div className={MyPlaylistCSS.title}>
+                <h1>MY PLAYLISTS</h1>
+                <i className='bx bxs-layer-plus'></i>
             </div>
 
-            <div className="items scroll-bar">
-                {data.username === undefined ? "" : data.playlists.length === 0 ? (
-                    <p className="text">You haven't created any playlists yet!</p>
-                ) : (
-                    data.playlists.map((playlist, index) => {
-                        return (
-                            <div className="playlist" key={index}>
-                                <p className="number">{index + 1}</p>
-                                
-                                <div className="playlist-title">
-                                    <Link to={`/library/myPlaylist/${playlist.name}`} state={playlist} >{playlist.name}</Link>
-                                    <p>Songs: {playlist.songs ? playlist.songs.length : 0}</p>
-                                    
-                                    <div className="option">
-                                        <button value={index} onClick={handleDelete}>Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                        )
+            <div className={MyPlaylistCSS.line}></div>
+
+            <div className={MyPlaylistCSS.p_display}>
+                {playlists.length !== 0 ? (
+                    playlists.map((playlist, index) => {
+                        return <PlaylistBox index={index + 1} playlist={playlist} /> 
                     })
+                ) : (
+                    <p>You haven't create any playlist yet !!</p>
                 )}
             </div>
         </div>
-    );
+    )
 }
 
 export default MyPlaylist;

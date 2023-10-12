@@ -24,7 +24,7 @@ router.get('/user/playlist/delete/:id&:username', userController.deletePlaylist)
 router.get('/user/playlist/:name&:username', userController.getPlaylist);
 router.get('/user/changepw/:username&:newpassword', userController.changePw);
 router.get('/user/changeinfo/:username&:newusername&:newavatar', userController.changeInfo);
-router.get('/user/:username', userController.getUser);
+router.get('/user/:id', userController.getUser);
 
 
 module.exports = router;

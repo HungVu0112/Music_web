@@ -1,0 +1,59 @@
+@import 'App.css';
+
+.playlist_box {
+    padding: 8px;
+    margin-top: 16px;
+    width: 60%;
+    height: 100px;
+    background: #282828;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px;
+    color: #faebd7;
+}
+
+.playlist_box > div {
+    display: flex;
+    align-items: center;
+}
+
+.playlist_box .index {
+    margin-left: 16px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.playlist_box .heading {
+    margin-left: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.playlist_box .heading img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.playlist_box .heading a {
+    color: #faebd7;
+    text-decoration: none;
+}
+
+.playlist_box .heading a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.playlist_box .s_count {
+    margin-left: 72px;
+    font-size: 18px;
+}
+
+.playlist_box i {
+    font-size: 32px;
+    margin-right: 16px;
+}
+

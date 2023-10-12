@@ -3,6 +3,7 @@ const Playlist = require('../model/Playlist');
 const Song = require('../model/Song');
 const Artist = require('../model/Artist');
 const Post = require('../model/Post');
+const { ObjectId } = require('mongodb');
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
@@ -121,8 +122,7 @@ class UserController {
     }
 
     getUser(req, res, next) {
-        const username = req.params.username.replace(/%20/g, " ");
-        User.findOne({ username: username })    
+        User.findOne({ _id: new ObjectId(req.params.id) })    
             .then(user => {
                 res.json(user);
             })
