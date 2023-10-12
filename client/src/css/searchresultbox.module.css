@@ -5,15 +5,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 60%;
+    width: 100%;
     height: 250px;
-    background: rgba(0,0,0,0.2);
-    box-shadow: 0 0 10px rgba(0,0,0,0.87);
 }
 
 .info_box {
     display: flex;
     align-items: center;
+    width: 60%;
     gap: 32px;
 }
 
@@ -31,11 +30,12 @@
 }
   
 .info_box .info {
+    width: 200px;
     color: #faebd7;
 }
   
 .info_box .info h2 {
-    font-size: 30px;
+    font-size: 20px;
     margin-bottom: 12px;
 }
   
@@ -44,20 +44,20 @@
 }
   
 .song_display {
-    width: 300px;
+    width: 40%;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
   
-.song_display p {
+.song_display > p {
     overflow: hidden;
     text-align: center;
     color: #faebd7;
 }
   
-.song_display p:before,
-.song_display p:after {
+.song_display > p:before,
+.song_display > p:after {
     background: #faebd7;
     content: "";
     display: inline-block;
@@ -67,12 +67,17 @@
     width: 50%;
 }
   
-.song_display p:before {
+.song_display > p:before {
     right: 0.5em;
     margin-left: -50%;
 }
   
-.song_display p:after {
+.song_display > p:after {
     left: 0.5em;
     margin-right: -50%;
+}
+
+.song_display .song {
+    width: 100%;
+    height: 90%;
 }

@@ -12,9 +12,10 @@ function PageContent({children}) {
     const user = JSON.parse(userJSON);
     const location = useLocation();
 
-    const [searchResult, setSearchResult] = useState([]);
+    const [searchResult, setSearchResult] = useState({});
     const [currMusic, setCurrMusic] = useState(null);
     const [currPlaylist, setCurrentPlaylist] = useState(null);
+    const [isSearch, setIsSearch] = useState(false);
 
     const homePage = useRef();
     const sidebar = useRef();
@@ -28,13 +29,12 @@ function PageContent({children}) {
         const value = e.target.value.trim();
 
         if (value !== "") {
-            axios.get(`http://localhost:9000/getAll/${value}`, searchResult)
+            axios.get(`http://localhost:9000/getAll/${value.replace(/\s/g, '')}`, searchResult)
                 .then(res => {
+                    setIsSearch(true);
                     setSearchResult(res.data);
                 })
                 .catch(err => {console.log(err);})
-        } else {
-            setSearchResult(new Array(0));
         }
     }   
 
@@ -120,7 +120,7 @@ function PageContent({children}) {
                 </Link>
             </div>
 
-            {location.pathname === "/search" ? <Search searchData={searchResult}/> : children}            
+            {location.pathname === "/search" ? <Search searchData={searchResult} isSearch={isSearch} /> : children}            
 
             {currMusic ? 
                 <Footer music={currMusic} playlist={currPlaylist} />

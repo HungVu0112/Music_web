@@ -8,9 +8,48 @@ class SearchAllController{
         const name = req.params.name.replace(/%20/g, " ");
         Promise.all([Artist.find({ name: { $regex : new RegExp(`${name}`, 'i') } }), 
                      Song.find({ name: { $regex : new RegExp(`${name}`, 'i') } }), 
-                     Playlist.find({ name: { $regex : new RegExp(`${name}`, 'i') } })])
-            .then(([artists, songs, playlists]) => {
-                res.json(artists.concat(songs.concat(playlists)));
+                     Album.find({ name: { $regex : new RegExp(`${name}`, 'i') } })])
+            .then( async ([artists, songs, albums]) => {
+                if (artists.length || songs.length || albums.length) {
+                    if (artists.length !== 0) {
+                        artists = await Promise.all(artists.map(async artist => {
+                            var albumCount = await Album.aggregate([
+                                { $match: { artist_name : { $regex : new RegExp(`${artist.name}`, 'i') } } },
+                                { $count: "albumCount" }
+                            ]);
+
+                            if (albumCount.length === 0) {
+                                albumCount = [
+                                    {
+                                        albumCount : 0
+                                    }
+                                ]
+                            }
+
+                            const songCount = await Song.aggregate([
+                                { $match: { artist_name: { $regex: new RegExp(`${artist.name}`, 'i') } } },
+                                { $count: "songCount" }
+                            ]);
+                          
+                            const songList = await Song.find({ artist_name : { $regex : new RegExp(`${artist.name}`, 'i') } });
+                          
+                            return {
+                              info: artist,
+                              songCount,
+                              songList,
+                              albumCount
+                            };
+                        }));
+                    }
+                    
+                    res.json({
+                        artists,
+                        songs,
+                        albums
+                    })
+                } else {
+                    res.json({})
+                }
             })
             .catch(next);
     }
