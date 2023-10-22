@@ -33,8 +33,8 @@ Một trang web nghe nhạc chuyên nghiệp với chất lượng tốt, đư�
 1.6. Thời gian kể từ bắt đầu dự án 
 - 3 tháng kể từ ngày 7/3
 
-2. Vai trò trong dự án
-- Fullstack
+2. Vai trò trong dự án ( Nhóm : 4 người )
+- Tạo API, thiết kế giao diện
 
 3.1 Điểm nhấn về mặt kỹ thuật và chỗ mình đầu tư công sức nhất
 - Điểm nhấn : sử dụng Reducer để có thể liên tục cập nhật vị trí con trỏ trên thanh phát nhạc theo thời gian chạy nhạc
